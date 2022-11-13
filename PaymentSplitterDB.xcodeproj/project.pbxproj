@@ -14,6 +14,7 @@
 		F28777B82912453700062D88 /* PaymentSplitterDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777B72912453700062D88 /* PaymentSplitterDBTests.swift */; };
 		F28777C22912453700062D88 /* PaymentSplitterDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777C12912453700062D88 /* PaymentSplitterDBUITests.swift */; };
 		F28777C42912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777C32912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift */; };
+		F2FCC92A291FAC6200ED2501 /* Nunito-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		F28777BD2912453700062D88 /* PaymentSplitterDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentSplitterDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28777C12912453700062D88 /* PaymentSplitterDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBUITests.swift; sourceTree = "<group>"; };
 		F28777C32912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F2FCC920291FA69400ED2501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +97,8 @@
 		F28777A52912453600062D88 /* PaymentSplitterDB */ = {
 			isa = PBXGroup;
 			children = (
+				F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */,
+				F2FCC920291FA69400ED2501 /* Info.plist */,
 				F28777A62912453600062D88 /* PaymentSplitterDBApp.swift */,
 				F28777A82912453600062D88 /* ContentView.swift */,
 				F28777AA2912453700062D88 /* Assets.xcassets */,
@@ -232,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F28777AE2912453700062D88 /* Preview Assets.xcassets in Resources */,
+				F2FCC92A291FAC6200ED2501 /* Nunito-VariableFont.ttf in Resources */,
 				F28777AB2912453700062D88 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -422,6 +428,7 @@
 				DEVELOPMENT_TEAM = V776ZMX8N3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PaymentSplitterDB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -451,6 +458,7 @@
 				DEVELOPMENT_TEAM = V776ZMX8N3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PaymentSplitterDB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
