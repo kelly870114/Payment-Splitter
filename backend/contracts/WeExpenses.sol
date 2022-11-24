@@ -281,7 +281,7 @@ contract WeExpenses {
             if (expense.agreements[expense.payees[i]]) {
                 participants[expense.payees[i]].balance -= _portion;
             }   
-        }       
+        }
     }
   
     /// @notice Calculate the state of the balance after each new payement
@@ -299,4 +299,3 @@ contract WeExpenses {
         return a < b ? a : b;
     }    
 }
-    
