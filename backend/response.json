@@ -1,0 +1,19 @@
+{"amy":
+{
+    "id":"01",
+    "name":"amy",
+    "amount":"10000"
+},
+"alan":
+{
+    "id":"02",
+    "name":"alan",
+    "amount":"20000"
+},
+"sherry":
+{
+    "id":"03",
+    "name":"sherry",
+    "amount":"30000"
+}
+}
