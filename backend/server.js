@@ -44,10 +44,10 @@ app.post('/createPayment', (req, res) => {
             if (err) {
                 console.error(err)
             }
-        })  
+        })
     })
 })
 
-// app.listen(process.env.PORT || 8082, () => {
-//     console.log('listening on port '+ (process.env.PORT || 8082));
-// })
+app.listen(process.env.PORT || 8082, () => {
+    console.log('listening on port '+ (process.env.PORT || 8082));
+ })

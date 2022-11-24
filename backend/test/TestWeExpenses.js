@@ -1,6 +1,5 @@
-const WeExpenses = artifacts.require('WeExpenses')
-const assert = require('assert')
+const Migrations = artifacts.require("WeExpenses");
+const assert = require('assert');
 
-contract('WeExpenses', (accounts) =>{
-    const BUYER = accounts[1];
-})
+contract('WeExpenses', )
+
