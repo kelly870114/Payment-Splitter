@@ -71,7 +71,7 @@ contract WeExpenses {
 
     
 
-    constructor (string memory name) public {
+    constructor (string memory name) public{
         createParticipant(name, msg.sender);
         deployed = true;
     }
