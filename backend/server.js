@@ -1,40 +1,34 @@
-// var MongoClient = require('mongodb').MongoClient;
+const express= require('express')
+const app =express()
+const bodyParser = require('body-parser')
+const fs = require('fs')
 
-// import mongoose from 'mongoose'
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+app.post('/createPayment', (req, res) => {
+    payer = req.body.from
+    payee = req.body.to
+    transfer = req.body.amount
 
-// var url = "mongodb://localhost:27017/";
+    fs.readFile('response.json', function(err, data) {
+        if (err) {
+            console.error(err)
+        }
+        
+        var person = data.toString();
+        person = JSON.parse(person);
+        person[payer].amount -= transfer
+        person[payee].amount += transfer
 
+        var str = JSON.stringify(person)
+        fs.writeFile("response.json", str, function(err) {
+            if (err) {
+                console.error(err)
+            }
+        })
+    })
+})
 
-// mongoose.connect(url, function(err, db) {
-//   if (err) throw err;
-//   var dbo = db.db("PaymentSplitter");
-//   var myobj = [
-//     { name: 'John', address: 'Highway 71'},
-//     { name: 'Peter', address: 'Lowstreet 4'},
-//     { name: 'Amy', address: 'Apple st 652'},
-//     { name: 'Hannah', address: 'Mountain 21'},
-//     { name: 'Michael', address: 'Valley 345'},
-//     { name: 'Sandy', address: 'Ocean blvd 2'},
-//     { name: 'Betty', address: 'Green Grass 1'},
-//     { name: 'Richard', address: 'Sky st 331'},
-//     { name: 'Susan', address: 'One way 98'},
-//     { name: 'Vicky', address: 'Yellow Garden 2'},
-//     { name: 'Ben', address: 'Park Lane 38'},
-//     { name: 'William', address: 'Central st 954'},
-//     { name: 'Chuck', address: 'Main Road 989'},
-//     { name: 'Viola', address: 'Sideway 1633'}
-//   ];
-//   dbo.collection("Users").insertMany(myobj, function(err, res) {
-//     if (err) throw err;
-//     console.log("Number of documents inserted: " + res.insertedCount);
-//     db.close();
-//   });
-
-//   dbo.collection("Users").find({}).toArray(function(err, result) {
-//     if (err) throw err;
-//     console.log(result);
-//     db.close();
-//   });
-// });
-
-
+app.listen(process.env.PORT || 8082, () => {
+    console.log('listening on port '+ (process.env.PORT || 8082));
+ })
