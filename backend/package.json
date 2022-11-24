@@ -7,9 +7,18 @@
     "test": "test"
   },
   "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
     "eslint": "^8.27.0",
+    "express": "^4.18.2",
+    "mongodb": "^4.12.0",
+    "mongoose": "^6.7.3",
+    "nodemon": "^2.0.20",
+    "shortid": "^2.2.16",
     "solc": "^0.4.26",
-    "truffle-assertions": "^0.9.2"
+    "truffle-assertions": "^0.9.2",
+    "truffle-contract": "^4.0.31",
+    "web3": "^1.8.1"
   },
   "devDependencies": {
     "@openzeppelin/test-helpers": "^0.5.16",
@@ -27,7 +36,9 @@
     "zeppelin-solidity": "^1.8.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js",
+    "build": "node server.js"
   },
   "repository": {
     "type": "git",
