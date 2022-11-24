@@ -1,13 +1,17 @@
 //
-//  TransferTo.swift
+//  TransferResult.swift
 //  PaymentSplitterDB
 //
-//  Created by 黃嬿羽 on 2022/11/16.
+//  Created by 黃嬿羽 on 2022/11/23.
 //
 
 import SwiftUI
 
-struct TransferTo: View {
+struct TransferResult: View {
+    @State private var amount = ""
+    var textFieldBorder: some View {
+        RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Color.white)
+    }
     var body: some View {
         var FontMini : Font = Font.custom("Nunito", size: 13)
         var FontSmall : Font = Font.custom("Nunito", size: 16)
@@ -27,9 +31,18 @@ struct TransferTo: View {
                 .font(FontSmall)
                 .foregroundColor(Color.white)
                 .fontWeight(.bold)
+            Text("Bitcoin 200.00")
+                .font(FontRegular)
+                .foregroundColor(Color.white)
+                .fontWeight(.bold)
             
-            CryptoCurrPicker()
+            Image("Success")
+                .resizable()
+                .frame(width: 45, height: 45)
+                .clipShape(Circle())
+            
         }
+        .frame(width: UIScreen.main.bounds.width*0.6)
         .padding()
         .background(Color("Card"))
         .cornerRadius(20)
@@ -38,8 +51,8 @@ struct TransferTo: View {
     }
 }
 
-struct TransferTo_Previews: PreviewProvider {
+struct TransferResult_Previews: PreviewProvider {
     static var previews: some View {
-        TransferTo()
+        TransferResult()
     }
 }

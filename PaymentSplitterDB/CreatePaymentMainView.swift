@@ -46,12 +46,11 @@ struct CreatePaymentMainView: View {
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height*0.4 )
-                    .background(Color.pink)
+                    
                     VStack(alignment: .leading){
                         HStack{
                             YouOweComponent()
-                                .frame(maxWidth: geometry.size.width*0.8, alignment: .leading)
-                                .background(Color.orange)
+                                .frame(maxWidth: geometry.size.width*0.78, alignment: .leading)
                             NavigationLink(destination: CreatePaymentMainView()) {
                                 Image("PayButton")
                                     .resizable()
@@ -61,7 +60,7 @@ struct CreatePaymentMainView: View {
                         }
                         
                             
-                    }.background(Color.green)
+                    }
                     
                 }
             }

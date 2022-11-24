@@ -30,7 +30,6 @@ struct CryptoCurrPicker: View {
                         Text(client.name)
                             .foregroundColor(client.name.isEmpty ? .gray : .black)
                         Spacer()
-                        
                         client.icon
                     }
                     .padding(.horizontal)
@@ -44,16 +43,16 @@ struct CryptoCurrPicker: View {
                 HStack{
                     selectedIcon?
                         .resizable()
-                        .frame(width: 30, height: 30)
+                        .frame(width: 20, height: 20)
                     
-                    //下拉選單文字（如果empty: Select Country)
+                    //下拉選單文字（如果empty: Select)
                     Text(selectedCrypto.isEmpty ? placeholder : selectedCrypto)
                         .foregroundColor(selectedCrypto.isEmpty ? .gray : .black)
                     
                     Spacer()
                     Image(systemName: "chevron.down")
                         .foregroundColor(Color.gray.opacity(0.33))
-                        .font(Font.system(size: 20, weight: .semibold))
+                        .font(Font.system(size: 16, weight: .semibold))
                 }
                 .padding()
                 .background(
