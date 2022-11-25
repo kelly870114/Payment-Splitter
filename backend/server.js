@@ -6,7 +6,7 @@ const fs = require('fs')
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
-app.post('/createPayment', (req, res) => {
+app.post('/createPayment:', (req, res) => {
     payer = req.body.from
     payee = req.body.to
     transfer = req.body.amount
