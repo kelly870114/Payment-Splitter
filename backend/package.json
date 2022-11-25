@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server2.js",
+    "start": "nodemon server.js",
     "build": "node server.js"
   },
   "repository": {
