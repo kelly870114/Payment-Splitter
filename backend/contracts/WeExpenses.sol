@@ -1,4 +1,4 @@
-pragma solidity >=0.4.20 <0.9.0;
+pragma solidity >=0.4.20 <0.8.0;
 
 
 /// @title A group expenses smart contract allowing you to settle up your debts and credits
@@ -45,7 +45,7 @@ contract WeExpenses {
         address payee;
     }
 
-    /// This declares a state variable that stores a `Participant` struct for each possible address.
+    /// This declares a state variable that stores a Participant struct for each possible address.
     mapping(address => Participant) public participants;
 
     /// This store in an array all the participants
@@ -54,10 +54,10 @@ contract WeExpenses {
     /// Allow the creation of the first participant when the contract is deployed
     bool public deployed = false;
     
-    // A dynamically-sized array of `Expenses` structs.
+    // A dynamically-sized array of Expenses structs.
     Expense[] public expenses;
 
-    // A dynamically-sized array of `Payments` structs.
+    // A dynamically-sized array of Payments structs.
     Payment[] public payments;
 
     // A mapping of all the available withdrawals per address
@@ -71,7 +71,7 @@ contract WeExpenses {
 
     
 
-    constructor (string memory name) public{
+    constructor (string memory name) public {
         createParticipant(name, msg.sender);
         deployed = true;
     }
@@ -281,7 +281,7 @@ contract WeExpenses {
             if (expense.agreements[expense.payees[i]]) {
                 participants[expense.payees[i]].balance -= _portion;
             }   
-        }
+        }       
     }
   
     /// @notice Calculate the state of the balance after each new payement

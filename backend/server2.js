@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
-
+var WeExpenses = artifacts.require("./WeExpenses.sol");
 // require('dotenv').config();
 const express= require('express')
 const app =express()
@@ -22,6 +22,11 @@ MongoClient.connect(url, function(err, db) {
     dbo.collection("Users").insertMany(myobj, function(err, res) {
         if (err) throw err;
         console.log("Number of documents inserted: " + res.insertedCount);
+    // module.exports = function(deployer) {
+    //   deployer.deploy(WeExpenses, participantName);
+    //   console.log("deploy: " + participantName);
+
+    // };
     })
     res.status(200);
     res.json({"sources":"200"});
