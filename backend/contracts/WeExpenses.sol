@@ -14,7 +14,7 @@ contract WeExpenses {
      */
     struct Participant {
         string name;
-        address waddress;
+        address waddress; 
         int balance;
         uint index;
     }
