@@ -2,48 +2,57 @@
 // const IPFS = require("ipfs-api")
 // const ipfs = new IPFS({host: 'ipfs.infura.io', port: 5001, protocol: 'https'})
 
-function routes(app, dbe){
+// const express= require('express')
+// const app =express()
+// const bodyParser = require('body-parser')
+// const fs = require('fs');
+// const { compileFunction } = require('vm');
+// const contract = require('truffle-contract');
+// const artifacts = require('./build/Inbox.json');
 
-    var db = dbe.collection("Users");
+// app.use(bodyParser.urlencoded({extended:false}));
+// app.use(bodyParser.json());
 
+function routes(app, dbe, lms, accounts){
+    let db = dbe.collection("Users")
     app.post('/createAccount', (req, res) =>{
         var accountName = req.body.name;
         var password = req.body.password;
         var intialAmount = 100000000000;
         var personInfo = {name: accountName, password:password, amount:intialAmount}
-        db.insertOne(personInfo, ()=>{
+        db.insertOne(personInfo, (err, doc)=>{
             if (err){
                 res.status(400);
-                res.json({"info": "Create User Fail!"});
+                res.json([{"info": "Create User Fail!"}]);
             };
         })
         
         res.status(200);
-        res.json({"info": "Create Account!"});
+        res.json([{"info": "Create Account!"}]);
   
     }); 
-
+    
     app.post('/login', (req, res)=>{
         var accountName = req.body.name;
         var password = req.body.password;
         if (accountName){
-            db.findOne({"name": accountName}, (err, doc) =>{
+          db.findOne({"name": accountName}, (err, doc) =>{
               if (doc){
                   if (doc.password == password){
                       res.status(200);
-                      res.json({"info": "Login Successful!"})
+                      res.json([{"info": "Login Successful!"}])
                   }else{
                       res.status(400);
-                      res.json({"info": "Wrong Password!"})
+                      res.json([{"info": "Wrong Password!"}])
                   }   
               }else{
                   res.status(400);
-                  res.json({"info": "No user!"});
+                  res.json([{"info": "No user!"}]);
               }
           })
         }else{
           res.status(400)
-          res.json({"info": "Wrong input"})
+          res.json([{"info": "Wrong input"}])
         }
     })
   
@@ -58,7 +67,7 @@ function routes(app, dbe){
           console.log("Number of documents inserted: " + res.insertedCount);
       })
       res.status(200);
-      res.json({"sources":"200"});
+      res.json([{"sources":"200"}]);
     });
   
     app.get('/showAmount/:name', (req, res) => {
@@ -68,7 +77,7 @@ function routes(app, dbe){
           if (err) throw err;
           payerAmount = result["amount"];
           res.status(200);
-          res.json({"amount":payerAmount});
+          res.json([{"amount":payerAmount}]);
       });
     });
   
@@ -90,9 +99,11 @@ function routes(app, dbe){
               if (err) throw err;
           });
       res.status(200);
-      res.json({"sources":"200"});
+      res.json([{"sources":"200"}]);
     });
 
+
+    
 }
 
 module.exports = routes
