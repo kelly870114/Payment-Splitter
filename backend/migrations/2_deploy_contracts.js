@@ -1,5 +1,5 @@
 var WeExpenses = artifacts.require("./WeExpenses.sol");
 
 module.exports = function(deployer) {
-    deployer.deploy(WeExpenses, "Alan");
-  };
+  deployer.deploy(WeExpenses, "Amy");
+};

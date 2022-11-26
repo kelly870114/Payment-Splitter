@@ -13,7 +13,7 @@ contract WeExpenses {
     Participant is a person or an organization which is part of the group expense.
      */
     struct Participant {
-        string name;
+        string name; 
         address waddress; 
         int balance;
         uint index;
