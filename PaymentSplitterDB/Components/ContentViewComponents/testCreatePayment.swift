@@ -7,14 +7,14 @@
 
 import SwiftUI
 struct Users : Hashable, Codable {
-    let name: String
+    //let name: String
     let amount: String
 }
 
 class PaymentViewModel: ObservableObject{
     @Published var users: [Users] = []
     func fetch() {
-        guard let url = URL(string: "http://localhost:8082/createParticipant") else{
+        guard let url = URL(string: "http://localhost:8082/showAmount/Will") else{
             return
         }
         let task = URLSession.shared.dataTask(with: url){
@@ -41,14 +41,16 @@ struct testCreatePayment: View {
     
     var body: some View {
         NavigationView{
+            
             List{
+                
                 ForEach(paymentViewModel.users, id: \.self) {
                     user in
                     HStack {
                         Image("")
                             .frame(width: 130, height: 70)
                             .background(Color.gray)
-                        Text(user.name)
+                        Text(user.amount)
                             .bold()
                     }
                     .padding(3)

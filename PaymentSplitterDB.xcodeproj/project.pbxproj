@@ -29,6 +29,7 @@
 		F28777B82912453700062D88 /* PaymentSplitterDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777B72912453700062D88 /* PaymentSplitterDBTests.swift */; };
 		F28777C22912453700062D88 /* PaymentSplitterDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777C12912453700062D88 /* PaymentSplitterDBUITests.swift */; };
 		F28777C42912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777C32912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift */; };
+		F2C7FDFE2931C7CE00F69553 /* Script.sh in Resources */ = {isa = PBXBuildFile; fileRef = F2C7FDFD2931C7CB00F69553 /* Script.sh */; };
 		F2FCC92A291FAC6200ED2501 /* Nunito-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */; };
 		F2FCC92E2922445600ED2501 /* CreatePaymentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCC92D2922445600ED2501 /* CreatePaymentMainView.swift */; };
 		F2FCC9312922D14400ED2501 /* TotalBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCC9302922D14400ED2501 /* TotalBalance.swift */; };
@@ -77,6 +78,7 @@
 		F28777BD2912453700062D88 /* PaymentSplitterDBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PaymentSplitterDBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28777C12912453700062D88 /* PaymentSplitterDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBUITests.swift; sourceTree = "<group>"; };
 		F28777C32912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F2C7FDFD2931C7CB00F69553 /* Script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script.sh; sourceTree = "<group>"; };
 		F2FCC920291FA69400ED2501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont.ttf"; sourceTree = "<group>"; };
 		F2FCC92D2922445600ED2501 /* CreatePaymentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentMainView.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		F287779A2912453600062D88 = {
 			isa = PBXGroup;
 			children = (
+				F2C7FDFD2931C7CB00F69553 /* Script.sh */,
 				F24F92F129309F1D00BBECAF /* FetchUsers.swift */,
 				F24F92EF29308ED300BBECAF /* testAPI.swift */,
 				F28777A52912453600062D88 /* PaymentSplitterDB */,
@@ -323,6 +326,7 @@
 				F28777AE2912453700062D88 /* Preview Assets.xcassets in Resources */,
 				F2FCC92A291FAC6200ED2501 /* Nunito-VariableFont.ttf in Resources */,
 				F28777AB2912453700062D88 /* Assets.xcassets in Resources */,
+				F2C7FDFE2931C7CE00F69553 /* Script.sh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

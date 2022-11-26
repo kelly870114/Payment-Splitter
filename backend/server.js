@@ -55,10 +55,9 @@ MongoClient.connect(url, function(err, db) {
         res.json({"info": "Wrong input"})
       }
   })
-});
 
-app.listen(process.env.PORT || 8082, () => {
-    console.log('listening on port '+ (process.env.PORT || 8082));
+
+
   app.post('/createParticipant', (req, res) => {
     participantName = req.body.name;
     paticipantAmount = req.body.amount;
