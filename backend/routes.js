@@ -23,12 +23,12 @@ function routes(app, dbe, lms, accounts){
         db.insertOne(personInfo, (err, doc)=>{
             if (err){
                 res.status(400);
-                res.json({"info": "Create User Fail!"});
+                res.json([{"info": "Create User Fail!"}]);
             };
         })
         
         res.status(200);
-        res.json({"info": "Create Account!"});
+        res.json([{"info": "Create Account!"}]);
   
     }); 
     
@@ -40,19 +40,19 @@ function routes(app, dbe, lms, accounts){
               if (doc){
                   if (doc.password == password){
                       res.status(200);
-                      res.json({"info": "Login Successful!"})
+                      res.json([{"info": "Login Successful!"}])
                   }else{
                       res.status(400);
-                      res.json({"info": "Wrong Password!"})
+                      res.json([{"info": "Wrong Password!"}])
                   }   
               }else{
                   res.status(400);
-                  res.json({"info": "No user!"});
+                  res.json([{"info": "No user!"}]);
               }
           })
         }else{
           res.status(400)
-          res.json({"info": "Wrong input"})
+          res.json([{"info": "Wrong input"}])
         }
     })
   
@@ -67,7 +67,7 @@ function routes(app, dbe, lms, accounts){
           console.log("Number of documents inserted: " + res.insertedCount);
       })
       res.status(200);
-      res.json({"sources":"200"});
+      res.json([{"sources":"200"}]);
     });
   
     app.get('/showAmount/:name', (req, res) => {
@@ -77,7 +77,7 @@ function routes(app, dbe, lms, accounts){
           if (err) throw err;
           payerAmount = result["amount"];
           res.status(200);
-          res.json({"amount":payerAmount});
+          res.json([{"amount":payerAmount}]);
       });
     });
   
@@ -99,7 +99,7 @@ function routes(app, dbe, lms, accounts){
               if (err) throw err;
           });
       res.status(200);
-      res.json({"sources":"200"});
+      res.json([{"sources":"200"}]);
     });
 
 

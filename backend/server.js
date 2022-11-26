@@ -6,7 +6,7 @@ const Web3 = require('web3');
 const contract = require('truffle-contract');
 const routes = require('./routes')
 const express= require('express')
-const app =express()
+const app = express()
 const bodyParser = require('body-parser')
 const artifacts = require('./build/contracts/WeExpenses.json');
 // const fs = require('fs');
@@ -22,8 +22,11 @@ LMS.setProvider(web3.currentProvider)
 MongoClient.connect(url, async(err, db) => {
 
   const dbe = db.db('PaymentSplitter');
+  // 抓Truffle裡的所有account
   const accounts = await web3.eth.getAccounts();
+  
   const lms = await LMS.deployed();
+  console.log(lms.getParticipantName);
 
   routes(app,dbe,lms,accounts);
 
