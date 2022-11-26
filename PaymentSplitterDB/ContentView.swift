@@ -73,6 +73,7 @@ struct ContentView: View {
                                     }
                                     //Action
                                 }
+                                .navigationBarBackButtonHidden(true)
                                 .padding(.top, 10)
                                 Spacer()
                                 Button(action: {print("HI")}) {
@@ -113,6 +114,7 @@ struct ContentView: View {
                 }
             }
         }
+        
         
     }
 }

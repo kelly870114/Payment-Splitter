@@ -18,6 +18,7 @@ extension UINavigationController: UIGestureRecognizerDelegate {
     }
 }
 
+
 struct CreatePaymentMainView: View {
     init() {
         //Use this if NavigationBarTitle is with displayMode = .inline
@@ -27,45 +28,46 @@ struct CreatePaymentMainView: View {
     var FontSmall : Font = Font.custom("Nunito", size: 16)
     var FontRegular : Font = Font.custom("Nunito", size: 20)
     var FontLarge : Font = Font.custom("Nunito", size: 30)
-    
+
     var body: some View {
-        NavigationView{
-            GeometryReader{ geometry in
-                VStack{
-                    ZStack(alignment: .topLeading){
-                        RoundedRectMid()
-                            .frame(width: geometry.size.width, height: geometry.size.height * 0.5).ignoresSafeArea()
-                        VStack(alignment: .center, spacing: 20){
-                            
-                            Image("Step1")
-                                .resizable()
-                                .frame(width:150, height: 25)
-                                .padding(.top, 50)
-                            TotalBalance()
-                            
-                        }
-                    }
-                    .frame(width: geometry.size.width, height: geometry.size.height*0.4 )
-                    
-                    VStack(alignment: .leading){
-                        HStack{
-                            YouOweComponent()
-                                .frame(maxWidth: geometry.size.width*0.78, alignment: .leading)
-                            NavigationLink(destination: CreatePaymentMainView()) {
-                                Image("PayButton")
-                                    .resizable()
-                                    .aspectRatio(100/100, contentMode: .fit)
-                                    .frame(width: 40)
-                            }
-                        }
+        
+        GeometryReader{ geometry in
+            VStack{
+                ZStack(alignment: .topLeading){
+                    RoundedRectMid()
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.5).ignoresSafeArea()
+                    VStack(alignment: .center, spacing: 20){
                         
-                            
+                        Image("Step1")
+                            .resizable()
+                            .frame(width:150, height: 25)
+                            .padding(.top, 50)
+                        TotalBalance()
+                        
+                    }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height*0.4 )
+                
+                VStack(alignment: .leading){
+                    HStack{
+                        YouOweComponent()
+                            .frame(maxWidth: geometry.size.width*0.78, alignment: .leading)
+                        NavigationLink(destination: CreatePaymentStep2View()) {
+                            Image("PayButton")
+                                .resizable()
+                                .aspectRatio(100/100, contentMode: .fit)
+                                .frame(width: 40)
+                        }
                     }
                     
+                        
                 }
+                
             }
-            .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
         }
+        .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        
     }
 }
 

@@ -12,8 +12,11 @@
 		F228DEDB29258A0B00265F24 /* CryptoCurrModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F228DED829258A0A00265F24 /* CryptoCurrModel.swift */; };
 		F228DEDC29258A0B00265F24 /* CryptoCurrPicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F228DED929258A0A00265F24 /* CryptoCurrPicker.bundle */; };
 		F24F92E8292AD1E700BBECAF /* TextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92E7292AD1E700BBECAF /* TextFieldStyle.swift */; };
-		F24F92EA292F3DB000BBECAF /* CreatePaymnetStep3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92E9292F3DB000BBECAF /* CreatePaymnetStep3View.swift */; };
+		F24F92EA292F3DB000BBECAF /* CreatePaymentStep3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92E9292F3DB000BBECAF /* CreatePaymentStep3View.swift */; };
 		F24F92EC292F449800BBECAF /* TransferResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92EB292F449800BBECAF /* TransferResult.swift */; };
+		F24F92F029308ED300BBECAF /* testAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92EF29308ED300BBECAF /* testAPI.swift */; };
+		F24F92F229309F1D00BBECAF /* FetchUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92F129309F1D00BBECAF /* FetchUsers.swift */; };
+		F24F92F42931B33600BBECAF /* testCreatePayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24F92F32931B33600BBECAF /* testCreatePayment.swift */; };
 		F25F05FD2922D3B80048DEDB /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25F05FC2922D3B80048DEDB /* History.swift */; };
 		F25F05FF2922D44E0048DEDB /* RoundedRectMid.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25F05FE2922D44E0048DEDB /* RoundedRectMid.swift */; };
 		F25F0602292359C70048DEDB /* YouOweComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25F0601292359C70048DEDB /* YouOweComponent.swift */; };
@@ -54,8 +57,11 @@
 		F228DED829258A0A00265F24 /* CryptoCurrModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoCurrModel.swift; sourceTree = "<group>"; };
 		F228DED929258A0A00265F24 /* CryptoCurrPicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CryptoCurrPicker.bundle; sourceTree = "<group>"; };
 		F24F92E7292AD1E700BBECAF /* TextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldStyle.swift; sourceTree = "<group>"; };
-		F24F92E9292F3DB000BBECAF /* CreatePaymnetStep3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymnetStep3View.swift; sourceTree = "<group>"; };
+		F24F92E9292F3DB000BBECAF /* CreatePaymentStep3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentStep3View.swift; sourceTree = "<group>"; };
 		F24F92EB292F449800BBECAF /* TransferResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferResult.swift; sourceTree = "<group>"; };
+		F24F92EF29308ED300BBECAF /* testAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testAPI.swift; sourceTree = "<group>"; };
+		F24F92F129309F1D00BBECAF /* FetchUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchUsers.swift; sourceTree = "<group>"; };
+		F24F92F32931B33600BBECAF /* testCreatePayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testCreatePayment.swift; sourceTree = "<group>"; };
 		F25F05FC2922D3B80048DEDB /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
 		F25F05FE2922D44E0048DEDB /* RoundedRectMid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedRectMid.swift; sourceTree = "<group>"; };
 		F25F0601292359C70048DEDB /* YouOweComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouOweComponent.swift; sourceTree = "<group>"; };
@@ -118,6 +124,7 @@
 				F2FCC9302922D14400ED2501 /* TotalBalance.swift */,
 				F25F05FC2922D3B80048DEDB /* History.swift */,
 				F228DED429256F8400265F24 /* TransferTo.swift */,
+				F24F92F32931B33600BBECAF /* testCreatePayment.swift */,
 				F24F92EB292F449800BBECAF /* TransferResult.swift */,
 			);
 			path = ContentViewComponents;
@@ -135,6 +142,8 @@
 		F287779A2912453600062D88 = {
 			isa = PBXGroup;
 			children = (
+				F24F92F129309F1D00BBECAF /* FetchUsers.swift */,
+				F24F92EF29308ED300BBECAF /* testAPI.swift */,
 				F28777A52912453600062D88 /* PaymentSplitterDB */,
 				F28777B62912453700062D88 /* PaymentSplitterDBTests */,
 				F28777C02912453700062D88 /* PaymentSplitterDBUITests */,
@@ -163,7 +172,7 @@
 				F28777AA2912453700062D88 /* Assets.xcassets */,
 				F25F0608292409EC0048DEDB /* CreatePaymentStep2View.swift */,
 				F2FCC92D2922445600ED2501 /* CreatePaymentMainView.swift */,
-				F24F92E9292F3DB000BBECAF /* CreatePaymnetStep3View.swift */,
+				F24F92E9292F3DB000BBECAF /* CreatePaymentStep3View.swift */,
 				F24F92E7292AD1E700BBECAF /* TextFieldStyle.swift */,
 				F228DED629258A0A00265F24 /* Currency Picker */,
 				F28777AC2912453700062D88 /* Preview Content */,
@@ -340,13 +349,16 @@
 			files = (
 				F25F06042923728B0048DEDB /* PayButton.swift in Sources */,
 				F28777A92912453600062D88 /* ContentView.swift in Sources */,
+				F24F92F029308ED300BBECAF /* testAPI.swift in Sources */,
 				F228DEDB29258A0B00265F24 /* CryptoCurrModel.swift in Sources */,
 				F24F92EC292F449800BBECAF /* TransferResult.swift in Sources */,
-				F24F92EA292F3DB000BBECAF /* CreatePaymnetStep3View.swift in Sources */,
+				F24F92EA292F3DB000BBECAF /* CreatePaymentStep3View.swift in Sources */,
 				F228DEDA29258A0B00265F24 /* CryptoCurrPicker.swift in Sources */,
 				F28777A72912453600062D88 /* PaymentSplitterDBApp.swift in Sources */,
+				F24F92F42931B33600BBECAF /* testCreatePayment.swift in Sources */,
 				F25F05FF2922D44E0048DEDB /* RoundedRectMid.swift in Sources */,
 				F2FCC92E2922445600ED2501 /* CreatePaymentMainView.swift in Sources */,
+				F24F92F229309F1D00BBECAF /* FetchUsers.swift in Sources */,
 				F2FCC9312922D14400ED2501 /* TotalBalance.swift in Sources */,
 				F25F0602292359C70048DEDB /* YouOweComponent.swift in Sources */,
 				F228DED529256F8400265F24 /* TransferTo.swift in Sources */,
