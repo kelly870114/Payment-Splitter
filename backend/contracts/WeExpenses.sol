@@ -1,4 +1,4 @@
-pragma solidity >=0.4.20 <0.9.0;
+pragma solidity >=0.4.20 <0.8.0;
 
 
 /// @title A group expenses smart contract allowing you to settle up your debts and credits
@@ -7,6 +7,8 @@ pragma solidity >=0.4.20 <0.9.0;
 /// check the debts and credits of the groups and settle up.
 /// @dev No comments for dev
 contract WeExpenses {
+
+    event check(string name, address _address);
 
 
     /**
@@ -45,7 +47,7 @@ contract WeExpenses {
         address payee;
     }
 
-    /// This declares a state variable that stores a `Participant` struct for each possible address.
+    /// This declares a state variable that stores a Participant struct for each possible address.
     mapping(address => Participant) public participants;
 
     /// This store in an array all the participants
@@ -54,10 +56,10 @@ contract WeExpenses {
     /// Allow the creation of the first participant when the contract is deployed
     bool public deployed = false;
     
-    // A dynamically-sized array of `Expenses` structs.
+    // A dynamically-sized array of Expenses structs.
     Expense[] public expenses;
 
-    // A dynamically-sized array of `Payments` structs.
+    // A dynamically-sized array of Payments structs.
     Payment[] public payments;
 
     // A mapping of all the available withdrawals per address
@@ -79,12 +81,13 @@ contract WeExpenses {
     /// @notice Create a participant. Only registered participant can add new participant
     /// @param _name the name of the participant
     /// @param _waddress the address of the participant
-    function createParticipant(string memory _name, address _waddress) public onlyByParticipant() {
-        require(_waddress != participants[_waddress].waddress || !deployed); //only one address per participant
-        require(_waddress != address(0)); // avoid to participant address equal to 0x0
+    function createParticipant(string memory _name, address _waddress) public{
+        // require(_waddress != participants[_waddress].waddress || !deployed); //only one address per participant
+        // require(_waddress != address(0)); // avoid to participant address equal to 0x0
         Participant memory participant = Participant({name: _name, waddress: _waddress, balance: 0, index: 0});
         participant.index = addressList.push(_waddress)-1; //add the address to the addressList
         participants[_waddress] = participant;
+        // emit check(_name, _waddress);
     }
 
     /// @notice Create an expense as payer. By default, the payer is the creator of the expense
@@ -206,6 +209,7 @@ contract WeExpenses {
     /// @return the name of the participant
     function getParticipantName(address _waddress) public view returns (string memory) {
         return participants[_waddress].name;
+     
     }
 
     /// @notice Check if there is duplicate inside array
@@ -299,4 +303,3 @@ contract WeExpenses {
         return a < b ? a : b;
     }    
 }
-    
