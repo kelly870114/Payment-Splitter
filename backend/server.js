@@ -24,14 +24,15 @@ MongoClient.connect(url, async(err, db) => {
   const dbe = db.db('PaymentSplitter');
   // 抓Truffle裡的所有account
   const accounts = await web3.eth.getAccounts();
+  web3.eth.defaultAccount = accounts[0];
   
   const lms = await LMS.deployed();
-  console.log(lms.getParticipantName);
-
+  // console.log(lms.getParticipantName);
+  
   routes(app,dbe,lms,accounts);
 
   app.listen(process.env.PORT || 8082, () => {
-    console.log('listening on port2 '+ (process.env.PORT || 8082));
+    console.log('listening on port '+ (process.env.PORT || 8082));
 });
 
 });

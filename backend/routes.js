@@ -18,14 +18,26 @@ function routes(app, dbe, lms, accounts){
     app.post('/createAccount', (req, res) =>{
         var accountName = req.body.name;
         var password = req.body.password;
+        var accountid = req.body.id;
         var intialAmount = 100000000000;
-        var personInfo = {name: accountName, password:password, amount:intialAmount}
-        db.insertOne(personInfo, (err, doc)=>{
-            if (err){
-                res.status(400);
-                res.json([{"info": "Create User Fail!"}]);
-            };
-        })
+        var personInfo = {id: accountid, name: accountName, password:password, amount:intialAmount}
+        lms.createParticipant(accountName,accounts[accountid],{from: accounts[0]})
+            .then(()=>{
+                
+                console.log("Hello World");
+                db.insertOne(personInfo, (err, doc)=>{
+                    if (err){
+                        res.status(400);
+                        res.json([{"info": "Create User Fail!"}]);
+                    };
+                });
+            })
+            .catch(err=>{
+                console.log(err)
+                // res.status(500).json({"status":"Failed", "reason":"Upload error occured"})
+            })
+        
+        
         
         res.status(200);
         res.json([{"info": "Create Account!"}]);
@@ -60,12 +72,12 @@ function routes(app, dbe, lms, accounts){
       participantName = req.body.name;
       paticipantAmount = req.body.amount;
       var myobj = [{name: participantName, amount: paticipantAmount}];
-      console.log(myobj);
-  
-      db.insertMany(myobj, function(err, res) {
-          if (err) throw err;
-          console.log("Number of documents inserted: " + res.insertedCount);
-      })
+    //   console.log(typeof participantName, typeof accounts[1]);
+      
+
+      
+        
+      
       res.status(200);
       res.json([{"sources":"200"}]);
     });
@@ -80,6 +92,26 @@ function routes(app, dbe, lms, accounts){
           res.json([{"amount":payerAmount}]);
       });
     });
+    app.get('/showParticipant/:id', (req, res) => {
+        id = req.params.id;
+        address  = accounts[id];
+        lms.getParticipantName(address)
+            .then((name)=>{
+                
+                console.log([{"Name":name, "address":address}]);
+            
+        
+                res.status(200);
+                res.json([{"Name":name, "address":address}]);
+            })
+            .catch(err=>{
+                console.log(err)
+                // res.status(500).json({"status":"Failed", "reason":"Upload error occured"})
+            })
+        
+
+        
+      });
   
     app.post('/createPayment', (req, res) => {
       payer = req.body.payer;
