@@ -1,5 +1,5 @@
 pragma solidity >=0.4.20 <0.8.0;
-
+pragma experimental ABIEncoderV2;
 
 /// @title A group expenses smart contract allowing you to settle up your debts and credits
 /// @author Adrien Arcuri
@@ -9,8 +9,7 @@ pragma solidity >=0.4.20 <0.8.0;
 contract WeExpenses {
 
     event check(string name, address _address);
-
-
+    int expenseID= 0;
     /**
     Participant is a person or an organization which is part of the group expense.
      */
@@ -106,6 +105,12 @@ contract WeExpenses {
 
         Expense memory expense = Expense(_title, _amount, _valueDate, now, _payer, _payees);
         expenses.push(expense);
+        expenseID += 1;
+    }
+
+    function getExpenseID() public view returns(int){
+        int currentID = expenseID - 1;
+        return currentID;
     }
 
     /// @notice Set participant's agreeement for an expense. Each participant has 4 weeks to set its agreement.
@@ -113,7 +118,7 @@ contract WeExpenses {
     /// @param agree the agreement of the participant : true of false
     function setAgreement(uint indexExpense, bool agree) public onlyByParticipant() {
         Expense storage expense = expenses[indexExpense];
-        require(now < expense.creationDate + 4 weeks);
+        // require(now < expense.creationDate + 4 weeks);
         require(expense.agreements[msg.sender] != agree);
         uint numberOfAgreeBefore = getNumberOfAgreements(indexExpense);
         /// Warning : There is no agreements when the expense is created. That's mean the balance did not synchronize.
@@ -207,9 +212,31 @@ contract WeExpenses {
     /// @notice Get name of a participant
     /// @param _waddress the address of the participant
     /// @return the name of the participant
-    function getParticipantName(address _waddress) public view returns (string memory) {
-        return participants[_waddress].name;
+    function getParticipant(address _waddress) public view returns (string memory, int, address) {
+        string memory name = participants[_waddress].name;
+        int balance = participants[_waddress].balance;
+        address _address = participants[_waddress].waddress;
+        return (name, balance, _address);
      
+    }
+
+    function getMsgSender() public view returns(address){
+        address sender = msg.sender;
+        return sender;
+    }
+
+    function getAllParticipants(address[] memory _partList) public view returns (string[] memory, int[] memory) {
+        string[] memory names = new string[](_partList.length);
+        int[]    memory balances = new int[](_partList.length);
+
+        for (uint i = 0; i < _partList.length; i++) {
+            Participant storage person = participants[_partList[i]];
+
+            names[i] = person.name;
+            balances[i] = person.balance;
+        }
+
+        return (names, balances);
     }
 
     /// @notice Check if there is duplicate inside array
