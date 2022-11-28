@@ -22,11 +22,10 @@ LMS.setProvider(web3.currentProvider)
 MongoClient.connect(url, async(err, db) => {
 
   const dbe = db.db('PaymentSplitter');
-  // 抓Truffle裡的所有account
+  // 抓Ganache裡的所有account
   const accounts = await web3.eth.getAccounts();
   
   const lms = await LMS.deployed();
-  console.log(lms.getParticipantName);
 
   routes(app,dbe,lms,accounts);
 
