@@ -26,7 +26,7 @@ MongoClient.connect(url, async(err, db) => {
   const accounts = await web3.eth.getAccounts();
   
   const lms = await LMS.deployed();
-  console.log(lms.getParticipantName);
+  // console.log(lms.getParticipantName);
 
   routes(app,dbe,lms,accounts);
 
