@@ -9,7 +9,7 @@ pragma experimental ABIEncoderV2;
 contract WeExpenses {
 
     event check(string name, address _address);
-    int expenseID= 0;
+    int expenseID = 0;
     /**
     Participant is a person or an organization which is part of the group expense.
      */
@@ -126,7 +126,6 @@ contract WeExpenses {
         if (numberOfAgreeBefore != 0) {
             revertBalance(indexExpense);
         }
-
         /// Update the number of agreements
         expense.agreements[msg.sender] = agree;
         uint numberOfAgreeAfter = getNumberOfAgreements(indexExpense);
