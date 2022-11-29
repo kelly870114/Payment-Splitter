@@ -201,27 +201,35 @@ function routes(app, dbe, lms, accounts, web3){
     })
 
     app.post('/createPayment', (req, res) => {
-        payer = req.body.payer;
-        payee = req.body.payee;
-        amount = req.body.amount;
-        increase = amount;
-        decrease = -amount;
-        console.log(payer);
-        var whereStr = {"name":payer};
-        var updateStr = {$inc: { "amount" : decrease}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-            if (err) throw err;
-        });
-        var whereStr = {"name":payee};
-        var updateStr = {$inc: { "amount" : increase}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-                if (err) throw err;
-            });
+        var payer = req.body.payer;
+        var payee = req.body.payee;
+        var title = req.body.title;
+        var amount = req.body.amount;
+
+        var payerAddress = accounts[HASHMAP[payer]];
+        var payeeAddress = accounts[HASHMAP[payee]];
+
+        lms.createPayment(title, payeeAddress, {from: payerAddress, value: amount, gas:3000000})
+            .then((info) =>{
+                console.log('create payment');
+                console.log(info)
+                lms.withdraw({from: payeeAddress})
+                    .then((info)=>{
+                        console.log("with draw successful");
+                        console.log(info);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        
         res.status(200);
-        res.json([{"sources":"200"}]);
-    });
-
-
+        res.json({"info": "make payment"});
+        
+    })
     
 }
 
