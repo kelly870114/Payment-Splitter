@@ -6,8 +6,7 @@ const HASHMAP = {
     "lance": 4,
     "ginny": 5
 } 
-const { resolveSoa } = require('dns');
-const { setTimeout } = require('timers/promises');
+
 
 function routes(app, dbe, lms, accounts, web3){
     let db = dbe.collection("Users")
