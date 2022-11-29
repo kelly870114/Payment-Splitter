@@ -34,8 +34,8 @@ MongoClient.connect(url, async(err, db) => {
         var ownerName = info[0];
         var ownerAddress = accounts[0];
         var password = "12345";
-        var initialAmount = web3.utils.fromWei(await web3.eth.getBalance(ownerAddress), 'ether');
-        var floatAmount = parseFloat(initialAmount);
+        var intialAmount = web3.utils.fromWei(await web3.eth.getBalance(ownerAddress), 'ether');
+        var floatAmount = parseFloat(intialAmount);
         var personInfo = {id: 0, name: ownerName, password: password, amount:floatAmount, address: ownerAddress}
 
         dbe.collection("Users").findOne({"address": ownerAddress}, (err, doc) =>{

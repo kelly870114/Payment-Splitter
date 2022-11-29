@@ -7,6 +7,7 @@ const HASHMAP = {
     "ginny": 5
 } 
 
+
 function routes(app, dbe, lms, accounts, web3){
     let db = dbe.collection("Users")
 
@@ -100,7 +101,7 @@ function routes(app, dbe, lms, accounts, web3){
   
     app.post('/createExpense',(req, res) =>{
         var title = req.body.title;
-        var amount = req.body.amount;
+        var amount = req.body.amount.toString();
         var date = req.body.date;
         var payer = req.body.payer;
         var payees = req.body.payees;
@@ -115,89 +116,142 @@ function routes(app, dbe, lms, accounts, web3){
         lms.createExpense(title, amount, date, payeesAddress, {from: payerAddress})
             .then(() =>{
                 console.log('Create Expense');
+                lms.getExpenseID({from: payerAddress})
+                    .then((info)=>{
+                        console.log(info)
+                        const currentExpenseID = info.words[0];
+                        console.log('currentExpense ID', currentExpenseID);
+                        res.status(200);
+                        res.json({"info": "Create Expense Successful!", "expenseID": currentExpenseID});
+                    })
+                    .catch((err) =>{
+                        console.log(err);
+                        res.status(400);
+                        res.json({"info": "Fail to create expense" });
+                     })
+            
             })
             .catch((err) =>{
                 console.log(err);
+                res.status(400);
+                res.json({"info": "Fail to create expense" });
         })
 
-        lms.getExpenseID({from: payerAddress})
-            .then((info)=>{
-                const currentExpenseID = info.words[0];
-                console.log("Current ID is ", currentExpenseID);
+        
+        
+        
+
+    })
+
+    app.post('/agree',(req, res) =>{
+        var agreeName = req.body.name;
+        var expenseID = req.body.expenseID;
+
+        var agreeAddress = accounts[HASHMAP[agreeName]];
+
+        lms.setAgreement(expenseID, true, {from: agreeAddress, gas:3000000})
+            .then(() =>{
+                console.log("success")
             })
             .catch((err) =>{
                 console.log(err);
             })
 
         res.status(200);
-        res.json({"info": "Great!"});
+        res.json({"info":`${agreeName} agree expense ${expenseID}`});
+    })
+
+    app.get('/getAllParticipants', (req, res) =>{
+
+        db.find({}, {'name': true}).toArray(function(err, results) {
+            var checker = accounts[0];
+            var participants = [];
+            results.forEach((p) =>{
+                participants.push(p.name);
+            });
+            var checkerAddress = accounts[HASHMAP[checker]];
+            var participantsAddress = [];
+
+            participants.forEach((p) =>{
+                participantsAddress.push(accounts[HASHMAP[p]]);
+            });
+
+            lms.getAllParticipants(participantsAddress, {from: checkerAddress})
+            .then((info) =>{
+
+                const balanceObject = []
+
+                for(var i = 0; i < participants.length; i++){
+                    var balance = BigInt(info[1][i]).toString()
+                    balanceObject.push({'name':participants[i], 'balance':balance })
+                }
+                res.status(200);
+                res.json({"info": "check all participants successful", "balanceInfo":balanceObject});
+
+
+            })
+            .catch((err) =>{
+                console.log(err)
+                res.status(400);
+                res.json({"info":"Fail to view all participants"});
+            })
+
+        });
 
     })
 
     app.post('/createPayment', async(req, res) => {
-        title = req.body.title;
-        payer = req.body.payer;
-        payee = req.body.payee;
-        amount = req.body.amount;
-        increase = amount;
-        decrease = -amount;
+        var payer = req.body.payer;
+        var payee = req.body.payee;
+        var title = req.body.title;
+        var amount = req.body.amount;
 
-        // Update MongoDB
-        var whereStr = {"name":payer};
-        var updateStr = {$inc: { "amount" : decrease}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-            if (err) throw err;
-        });
-        var whereStr = {"name":payee};
-        var updateStr = {$inc: { "amount" : increase}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-                if (err) throw err;
-            });
+        var payerAddress = accounts[HASHMAP[payer]];
+        var payeeAddress = accounts[HASHMAP[payee]];
 
-        // Update Blockchain (solidity)
-        payerAddr = accounts[HASHMAP[payer]]
-        payeeAddr = accounts[HASHMAP[payee]]
-        amount = amount.toString(); // 先轉成string，才可以換成wei
-        const intWeiAmount = web3.utils.toWei(amount, "ether");
-        lms.createPayment(title, payerAddr, payeeAddr, intWeiAmount, {from: payerAddr})
-        .then(()=>{
-            console.log("Add to solidity!");
-        })
-        .catch(err=>{
-            console.log(err)
-        }) 
+        lms.createPayment(title, payeeAddress, {from: payerAddress, value: amount, gas:3000000})
+            .then(async(info) =>{
+                console.log('create payment');
+                
+                lms.withdraw({from: payeeAddress})
+                    .then(async(info)=>{
+                        console.log("with draw successful");
+                        // console.log(info);
 
-        // Update ganache
-        const weiAmount = intWeiAmount.toString();
-        console.log(weiAmount);
-        web3.eth.sendTransaction({
-            from: payerAddr,
-            to: payeeAddr,
-            value: weiAmount
-            // value: '1000000000000000000',
-            // gasPrice: Number.MAX_SAFE_INTEGER
-            // gasPrice: 200000000
-        })
-        console.log("Add to ganache!");
+                        // Update MongoDB
+                        const getAmount = async (address) => {
+                            const balance = web3.utils.fromWei(
+                                await web3.eth.getBalance(address),
+                                "ether"
+                            );
+                            return balance;
+                        }
+                        var payerNewAmount = await getAmount(payerAddress);
+                        var payeeNewAmount = await getAmount(payeeAddress);
 
-        // Check ganache
-        const getAmount = async () => {
-            const balance = web3.utils.fromWei(
-                await web3.eth.getBalance(payerAddr),
-                "ether"
-            )
-            return balance;
-        }
+                        var whereStr = {"name":payer};
+                        var updateStr = {$set: { "amount" : parseFloat(payerNewAmount)}};
+                        db.updateOne(whereStr, updateStr, function(err, res) {
+                            if (err) throw err;
+                        });
+                        var whereStr = {"name":payee};
+                        var updateStr = {$set: { "amount" : parseFloat(payeeNewAmount)}};
+                        db.updateOne(whereStr, updateStr, function(err, res) {
+                            if (err) throw err;
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
 
-        var initialAmount = await getAmount();
-        console.log("Check from ganache:")
-        console.log(initialAmount);
-        
         res.status(200);
-        res.json([{"sources":"200"}]);
-    });
-
-
+        res.json({"info": "make payment"});
+        
+    })
     
 }
 
