@@ -16,14 +16,6 @@ function routes(app, dbe, lms, accounts, web3){
         var accountName = req.body.name;
         var password = req.body.password;
         var accountid = HASHMAP[accountName];
-
-
-        console.log(accountName);
-        if (accountName != "amy" && accountName != "sherry" && accountName != "alan" && accountName != "byron" && accountName != "lance" && accountName != "ginny"){
-            res.status(400);
-            res.json([{"info": "Create User Fail: Not in HASHMAP!"}]);
-        }
-
         var address = (accounts[accountid]);
         const getAmount = async () => {
             const balance = web3.utils.fromWei(
@@ -32,35 +24,25 @@ function routes(app, dbe, lms, accounts, web3){
             );
             return balance;
         }
-        const initialAmount = await getAmount();
-        var personInfo = {id: accountid, name: accountName, password:password, amount:initialAmount, address: address};
 
-        if (accountName){
-            db.findOne({"name": accountName}, (err, doc) =>{
-                if (doc){
-                    if (doc.name == accountName){
+        var initialAmount = await getAmount();
+        var floatAmount = parseFloat(initialAmount);
+        var personInfo = {id: accountid, name: accountName, password:password, amount:floatAmount, address: address};
+        lms.createParticipant(accountName, address, {from: accounts[0]})
+            .then(()=>{
+                db.insertOne(personInfo, (err, doc)=>{
+                    if (err){
                         res.status(400);
-                        res.json([{"info": "Create User Fail: Already exit!"}]);
-                    }
-                }
-                else{
-                    lms.createParticipant(accountName, address, {from: accounts[0]})
-                        .then(()=>{
-                            db.insertOne(personInfo, (err, doc)=>{
-                                if (err){
-                                    res.status(400);
-                                    res.json([{"info": "Create User Fail!"}]);
-                                };
-                            });
-                        })
-                        .catch(err=>{
-                            console.log(err)
-                        })
-                    res.status(200);
-                    res.json([{"info": "Create Account!"}]);
-                }  
+                        res.json([{"info": "Create User Fail!"}]);
+                    };
+                });
             })
-        }
+            .catch(err=>{
+                console.log(err)
+                
+            })
+        res.status(200);
+        res.json([{"info": "Create Account!"}]);
   
     }); 
     
@@ -68,7 +50,7 @@ function routes(app, dbe, lms, accounts, web3){
         var accountName = req.body.name;
         var password = req.body.password;
         if (accountName){
-          db.findOne({"name": accountName}, (err, doc) =>{
+          dbo.findOne({"name": accountName}, (err, doc) =>{
               if (doc){
                   if (doc.password == password){
                       res.status(200);
@@ -77,14 +59,12 @@ function routes(app, dbe, lms, accounts, web3){
                       res.status(400);
                       res.json({"info": "Wrong Password!"})
                   }   
-              }
-              else{
+              }else{
                   res.status(400);
                   res.json({"info": "No user!"});
               }
           })
-        }
-        else{
+        }else{
           res.status(400)
           res.json({"info": "Wrong input"})
         }
@@ -97,6 +77,7 @@ function routes(app, dbe, lms, accounts, web3){
       db.findOne(whereStr, (err, result) => {
           if (err) throw err;
           payerAmount = result["amount"];
+        //   console.log(typeof(parseInt(payerAmount, 10)));
           res.status(200);
           res.json([{"amount":payerAmount}]);
       });
@@ -105,9 +86,11 @@ function routes(app, dbe, lms, accounts, web3){
         id = req.params.id;
         address  = accounts[id];
         lms.getParticipant(address)
-            .then((info)=>{
+            .then((name, balance, address)=>{
+                
+                console.log([{"Name":name, "Address":address}]);
                 res.status(200);
-                res.json([{"Name":info[0], "Balance": info[1].words[0],"Address":info[2]}]);
+                res.json([{"Name":name, "Balance": balance, "Address": address}]);
             })
             .catch(err=>{
                 console.log(err)
@@ -217,28 +200,58 @@ function routes(app, dbe, lms, accounts, web3){
 
     })
 
-    app.post('/createPayment', (req, res) => {
-        payer = req.body.payer;
-        payee = req.body.payee;
-        amount = req.body.amount;
-        increase = amount;
-        decrease = -amount;
-        console.log(payer);
-        var whereStr = {"name":payer};
-        var updateStr = {$inc: { "amount" : decrease}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-            if (err) throw err;
-        });
-        var whereStr = {"name":payee};
-        var updateStr = {$inc: { "amount" : increase}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-                if (err) throw err;
-            });
+    app.post('/createPayment', async(req, res) => {
+        var payer = req.body.payer;
+        var payee = req.body.payee;
+        var title = req.body.title;
+        var amount = req.body.amount;
+
+        var payerAddress = accounts[HASHMAP[payer]];
+        var payeeAddress = accounts[HASHMAP[payee]];
+
+        lms.createPayment(title, payeeAddress, {from: payerAddress, value: amount, gas:3000000})
+            .then(async(info) =>{
+                console.log('create payment');
+                
+                lms.withdraw({from: payeeAddress})
+                    .then(async(info)=>{
+                        console.log("with draw successful");
+                        // console.log(info);
+
+                        // Update MongoDB
+                        const getAmount = async (address) => {
+                            const balance = web3.utils.fromWei(
+                                await web3.eth.getBalance(address),
+                                "ether"
+                            );
+                            return balance;
+                        }
+                        var payerNewAmount = await getAmount(payerAddress);
+                        var payeeNewAmount = await getAmount(payeeAddress);
+
+                        var whereStr = {"name":payer};
+                        var updateStr = {$set: { "amount" : parseFloat(payerNewAmount)}};
+                        db.updateOne(whereStr, updateStr, function(err, res) {
+                            if (err) throw err;
+                        });
+                        var whereStr = {"name":payee};
+                        var updateStr = {$set: { "amount" : parseFloat(payeeNewAmount)}};
+                        db.updateOne(whereStr, updateStr, function(err, res) {
+                            if (err) throw err;
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
         res.status(200);
-        res.json([{"sources":"200"}]);
-    });
-
-
+        res.json({"info": "make payment"});
+        
+    })
     
 }
 

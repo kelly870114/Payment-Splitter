@@ -14,7 +14,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 const LMS = contract(artifacts);
-LMS.setProvider(web3.currentProvider)
+LMS.setProvider(web3.currentProvider);
 
 MongoClient.connect(url, async(err, db) => {
 
@@ -25,18 +25,16 @@ MongoClient.connect(url, async(err, db) => {
     // 智能合約的創立者 defatult 都給第一個account
     web3.eth.defaultAccount = accounts[0];
   
-  
-
     const lms = await LMS.deployed();
 
     // 處史話智能合約擁有者資訊
     lms.getParticipant(accounts[0],{from: accounts[0]}).then(async(info) =>{
         var ownerName = info[0];
         var ownerAddress = accounts[0];
-        var password = 12345;
+        var password = "12345";
         var intialAmount = web3.utils.fromWei(await web3.eth.getBalance(ownerAddress), 'ether');
-
-        var personInfo = {id: 0, name: ownerName, password: password, amount:intialAmount, address: ownerAddress}
+        var floatAmount = parseFloat(intialAmount);
+        var personInfo = {id: 0, name: ownerName, password: password, amount:floatAmount, address: ownerAddress}
 
         dbe.collection("Users").findOne({"address": ownerAddress}, (err, doc) =>{
             if (! doc){
@@ -61,4 +59,3 @@ MongoClient.connect(url, async(err, db) => {
     });
 
 });
-
