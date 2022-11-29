@@ -1,111 +1,61 @@
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/";
+var url = "mongodb://127.0.0.1:27017/";
 
-// require('dotenv').config();
+require('dotenv').config();
+const Web3 = require('web3');
+const contract = require('truffle-contract');
+const routes = require('./routes')
 const express= require('express')
-const app =express()
+const app = express()
 const bodyParser = require('body-parser')
-const fs = require('fs');
-const { compileFunction } = require('vm');
-
+const artifacts = require('./build/contracts/WeExpenses.json');
+;
+var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'))
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+const LMS = contract(artifacts);
+LMS.setProvider(web3.currentProvider);
 
-MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
-  var dbo = db.db("PaymentSplitter");
+MongoClient.connect(url, async(err, db) => {
 
-  app.post('/createAccount', (req, res) =>{
-      var accountName = req.body.name;
-      var password = req.body.password;
-      var intialAmount = 100000000000;
-      var personInfo = {name: accountName, password:password, amount:intialAmount}
-      dbo.collection("Users").insertOne(personInfo, ()=>{
-          if (err){
-              res.status(400);
-              res.json({"info": "Create User Fail!"});
-          };
-      })
-      
-      res.status(200);
-      res.json({"info": "Create Account!"});
+    const dbe = db.db('PaymentSplitter');
+    // 抓Truffle裡的所有account
+    const accounts = await web3.eth.getAccounts();
 
-  }); 
+    // 智能合約的創立者 defatult 都給第一個account
+    web3.eth.defaultAccount = accounts[0];
   
-  app.post('/login', (req, res)=>{
-      var accountName = req.body.name;
-      var password = req.body.password;
-      if (accountName){
-        dbo.collection("Users").findOne({"name": accountName}, (err, doc) =>{
-            if (doc){
-                if (doc.password == password){
-                    res.status(200);
-                    res.json({"info": "Login Successful!"})
-                }else{
-                    res.status(400);
-                    res.json({"info": "Wrong Password!"})
-                }   
+    const lms = await LMS.deployed();
+
+    // 處史話智能合約擁有者資訊
+    lms.getParticipant(accounts[0],{from: accounts[0]}).then(async(info) =>{
+        var ownerName = info[0];
+        var ownerAddress = accounts[0];
+        var password = "12345";
+        var intialAmount = web3.utils.fromWei(await web3.eth.getBalance(ownerAddress), 'ether');
+        var floatAmount = parseFloat(intialAmount);
+        var personInfo = {id: 0, name: ownerName, password: password, amount:floatAmount, address: ownerAddress}
+
+        dbe.collection("Users").findOne({"address": ownerAddress}, (err, doc) =>{
+            if (! doc){
+                dbe.collection("Users").insertOne(personInfo, (err, doc)=>{
+                    if (err){
+                        console.log("Create Owner Failed !");
+                    }
+                    else{
+                        console.log("Create Owner Successful !");
+                    }
+                });
             }else{
-                res.status(400);
-                res.json({"info": "No user!"});
+                console.log("Owner already exists");
             }
         })
-      }else{
-        res.status(400)
-        res.json({"info": "Wrong input"})
-      }
-  })
-
-
-
-  app.post('/createParticipant', (req, res) => {
-    participantName = req.body.name;
-    paticipantAmount = req.body.amount;
-    var myobj = [{name: participantName, amount: paticipantAmount}];
-    console.log(myobj);
-
-    dbo.collection("Users").insertMany(myobj, function(err, res) {
-        if (err) throw err;
-        console.log("Number of documents inserted: " + res.insertedCount);
     })
-    res.status(200);
-    res.json({"sources":"200"});
-  });
 
-  app.get('/showAmount/:name', (req, res) => {
-    accountName = req.params.name;
-    var whereStr = {"name":accountName};
-    dbo.collection("Users").find(whereStr).toArray(function(err, result) {
-        if (err) throw err;
-        payerAmount = result[0]["amount"];
-        res.status(200);
-        res.json({"amount":payerAmount});
+    routes(app,dbe,lms,accounts, web3);
+
+    app.listen(process.env.PORT || 8082, () => {
+        console.log('listening on port '+ (process.env.PORT || 8082));
     });
-  });
 
-  app.post('/createPayment', (req, res) => {
-    payer = req.body.payer;
-    payee = req.body.payee;
-    amount = req.body.amount;
-    increase = amount;
-    decrease = -amount;
-    console.log(payer);
-    var whereStr = {"name":payer};
-    var updateStr = {$inc: { "amount" : decrease}};
-    dbo.collection("Users").updateOne(whereStr, updateStr, function(err, res) {
-        if (err) throw err;
-    });
-    var whereStr = {"name":payee};
-    var updateStr = {$inc: { "amount" : increase}};
-    dbo.collection("Users").updateOne(whereStr, updateStr, function(err, res) {
-            if (err) throw err;
-        });
-    res.status(200);
-    res.json({"sources":"200"});
-  });
-
-});
-
-app.listen(process.env.PORT || 8082, () => {
-    console.log('listening on port2 '+ (process.env.PORT || 8082));
 });

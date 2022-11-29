@@ -1,5 +1,5 @@
-pragma solidity >=0.4.20 <0.9.0;
-
+pragma solidity >=0.4.20 <0.8.0;
+pragma experimental ABIEncoderV2;
 
 /// @title A group expenses smart contract allowing you to settle up your debts and credits
 /// @author Adrien Arcuri
@@ -8,13 +8,14 @@ pragma solidity >=0.4.20 <0.9.0;
 /// @dev No comments for dev
 contract WeExpenses {
 
-
+    event check(string name, address _address);
+    int expenseID = 0;
     /**
     Participant is a person or an organization which is part of the group expense.
      */
     struct Participant {
-        string name;
-        address waddress;
+        string name; 
+        address waddress; 
         int balance;
         uint index;
     }
@@ -45,7 +46,7 @@ contract WeExpenses {
         address payee;
     }
 
-    /// This declares a state variable that stores a `Participant` struct for each possible address.
+    /// This declares a state variable that stores a Participant struct for each possible address.
     mapping(address => Participant) public participants;
 
     /// This store in an array all the participants
@@ -54,10 +55,10 @@ contract WeExpenses {
     /// Allow the creation of the first participant when the contract is deployed
     bool public deployed = false;
     
-    // A dynamically-sized array of `Expenses` structs.
+    // A dynamically-sized array of Expenses structs.
     Expense[] public expenses;
 
-    // A dynamically-sized array of `Payments` structs.
+    // A dynamically-sized array of Payments structs.
     Payment[] public payments;
 
     // A mapping of all the available withdrawals per address
@@ -79,12 +80,13 @@ contract WeExpenses {
     /// @notice Create a participant. Only registered participant can add new participant
     /// @param _name the name of the participant
     /// @param _waddress the address of the participant
-    function createParticipant(string memory _name, address _waddress) public onlyByParticipant() {
-        require(_waddress != participants[_waddress].waddress || !deployed); //only one address per participant
-        require(_waddress != address(0)); // avoid to participant address equal to 0x0
+    function createParticipant(string memory _name, address _waddress) public{
+        // require(_waddress != participants[_waddress].waddress || !deployed); //only one address per participant
+        // require(_waddress != address(0)); // avoid to participant address equal to 0x0
         Participant memory participant = Participant({name: _name, waddress: _waddress, balance: 0, index: 0});
         participant.index = addressList.push(_waddress)-1; //add the address to the addressList
         participants[_waddress] = participant;
+        // emit check(_name, _waddress);
     }
 
     /// @notice Create an expense as payer. By default, the payer is the creator of the expense
@@ -103,6 +105,12 @@ contract WeExpenses {
 
         Expense memory expense = Expense(_title, _amount, _valueDate, now, _payer, _payees);
         expenses.push(expense);
+        expenseID += 1;
+    }
+
+    function getExpenseID() public view returns(int){
+        int currentID = expenseID - 1;
+        return currentID;
     }
 
     /// @notice Set participant's agreeement for an expense. Each participant has 4 weeks to set its agreement.
@@ -110,7 +118,7 @@ contract WeExpenses {
     /// @param agree the agreement of the participant : true of false
     function setAgreement(uint indexExpense, bool agree) public onlyByParticipant() {
         Expense storage expense = expenses[indexExpense];
-        require(now < expense.creationDate + 4 weeks);
+        // require(now < expense.creationDate + 4 weeks);
         require(expense.agreements[msg.sender] != agree);
         uint numberOfAgreeBefore = getNumberOfAgreements(indexExpense);
         /// Warning : There is no agreements when the expense is created. That's mean the balance did not synchronize.
@@ -118,7 +126,6 @@ contract WeExpenses {
         if (numberOfAgreeBefore != 0) {
             revertBalance(indexExpense);
         }
-
         /// Update the number of agreements
         expense.agreements[msg.sender] = agree;
         uint numberOfAgreeAfter = getNumberOfAgreements(indexExpense);
@@ -204,8 +211,31 @@ contract WeExpenses {
     /// @notice Get name of a participant
     /// @param _waddress the address of the participant
     /// @return the name of the participant
-    function getParticipantName(address _waddress) public view returns (string memory) {
-        return participants[_waddress].name;
+    function getParticipant(address _waddress) public view returns (string memory, int, address) {
+        string memory name = participants[_waddress].name;
+        int balance = participants[_waddress].balance;
+        address _address = participants[_waddress].waddress;
+        return (name, balance, _address);
+     
+    }
+
+    function getMsgSender() public view returns(address){
+        address sender = msg.sender;
+        return sender;
+    }
+
+    function getAllParticipants(address[] memory _partList) public view returns (string[] memory, int[] memory) {
+        string[] memory names = new string[](_partList.length);
+        int[]    memory balances = new int[](_partList.length);
+
+        for (uint i = 0; i < _partList.length; i++) {
+            Participant storage person = participants[_partList[i]];
+
+            names[i] = person.name;
+            balances[i] = person.balance;
+        }
+
+        return (names, balances);
     }
 
     /// @notice Check if there is duplicate inside array
@@ -281,7 +311,7 @@ contract WeExpenses {
             if (expense.agreements[expense.payees[i]]) {
                 participants[expense.payees[i]].balance -= _portion;
             }   
-        }       
+        }
     }
   
     /// @notice Calculate the state of the balance after each new payement
@@ -299,4 +329,3 @@ contract WeExpenses {
         return a < b ? a : b;
     }    
 }
-    

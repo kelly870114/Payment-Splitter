@@ -1,5 +1,5 @@
-
 // Allows us to use ES6 in our migrations and tests.
+contracts_directory: '/Users/topang/Desktop/paymentsplitterdb/backend/contracts',
 require('babel-register')({
   ignore: /node_modules\/(?!zeppelin-solidity\/test\/helpers)/
 });
@@ -8,10 +8,11 @@ module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
   networks: {
-    development: {
-      host: "127.0.0.1",
+    ddevelopment: {
+      host: "localhost",
       port: 7545,
-      network_id: '*' // Match any network id
+      network_id: "*" // match any network
     }
+    
   }
 }
