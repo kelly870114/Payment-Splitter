@@ -6,8 +6,7 @@ const HASHMAP = {
     "lance": 4,
     "ginny": 5
 } 
-const { resolveSoa } = require('dns');
-const { setTimeout } = require('timers/promises');
+
 
 function routes(app, dbe, lms, accounts, web3){
     let db = dbe.collection("Users")
@@ -26,9 +25,10 @@ function routes(app, dbe, lms, accounts, web3){
             return balance;
         }
 
-        const initialAmount = await getAmount();
+        var initialAmount = await getAmount();
+        var floatAmount = parseFloat(initialAmount);
 
-        var personInfo = {id: accountid, name: accountName, password:password, amount:initialAmount, address: address};
+        var personInfo = {id: accountid, name: accountName, password:password, amount:floatAmount, address: address};
         lms.createParticipant(accountName, address, {from: accounts[0]})
             .then(()=>{
                 db.insertOne(personInfo, (err, doc)=>{
@@ -82,14 +82,15 @@ function routes(app, dbe, lms, accounts, web3){
           res.json([{"amount":payerAmount}]);
       });
     });
-    app.get('/showParticipant/:name', (req, res) => {
-        lms.getParticipant(accounts[HASHMAP[req.params.name]])
-            .then((info)=>{
+    app.get('/showParticipant/:id', (req, res) => {
+        id = req.params.id;
+        address  = accounts[id];
+        lms.getParticipantName(address)
+            .then((name)=>{
                 
-                
-                console.log([{"Name":info[0], "Address":info[2]}]);
+                console.log([{"Name":name, "address":address}]);
                 res.status(200);
-                res.json([{"Name":info[0],"Balance":info[1].words[0], "Address":info[2]}]);
+                res.json([{"Name":name, "address":address}]);
             })
             .catch(err=>{
                 console.log(err)
@@ -199,7 +200,7 @@ function routes(app, dbe, lms, accounts, web3){
 
     })
 
-    app.post('/createPayment', (req, res) => {
+    app.post('/createPayment', async(req, res) => {
         var payer = req.body.payer;
         var payee = req.body.payee;
         var title = req.body.title;
@@ -209,13 +210,35 @@ function routes(app, dbe, lms, accounts, web3){
         var payeeAddress = accounts[HASHMAP[payee]];
 
         lms.createPayment(title, payeeAddress, {from: payerAddress, value: amount, gas:3000000})
-            .then((info) =>{
+            .then(async(info) =>{
                 console.log('create payment');
-                console.log(info)
+                
                 lms.withdraw({from: payeeAddress})
-                    .then((info)=>{
+                    .then(async(info)=>{
                         console.log("with draw successful");
-                        console.log(info);
+                        // console.log(info);
+
+                        // Update MongoDB
+                        const getAmount = async (address) => {
+                            const balance = web3.utils.fromWei(
+                                await web3.eth.getBalance(address),
+                                "ether"
+                            );
+                            return balance;
+                        }
+                        var payerNewAmount = await getAmount(payerAddress);
+                        var payeeNewAmount = await getAmount(payeeAddress);
+
+                        var whereStr = {"name":payer};
+                        var updateStr = {$set: { "amount" : parseFloat(payerNewAmount)}};
+                        db.updateOne(whereStr, updateStr, function(err, res) {
+                            if (err) throw err;
+                        });
+                        var whereStr = {"name":payee};
+                        var updateStr = {$set: { "amount" : parseFloat(payeeNewAmount)}};
+                        db.updateOne(whereStr, updateStr, function(err, res) {
+                            if (err) throw err;
+                        });
                     })
                     .catch((err) => {
                         console.log(err);
@@ -224,42 +247,11 @@ function routes(app, dbe, lms, accounts, web3){
             .catch((err) => {
                 console.log(err);
             })
-        
+
         res.status(200);
-<<<<<<< HEAD
-        res.json([{"sources":"200"}]);
-    });
-    app.post('/withdraw', (req, res) => {
-        lms.withdraw(accounts[1],{from: accounts[0],value: 1000000000000000000})
-            .then(()=>{
-                console.log("hello");
-            })
-            .catch(err=>{
-                console.log(err)
-                
-            })
-       
-      });
-    app.get('/getWithdrawal/:name', (req, res) => {
-        ID = HASHMAP[req.params.name]
-    lms.getWithdrawal(accounts[ID])
-        .then((info)=>{
-            console.log(info.balance);
-            res.status(200);
-        })
-        .catch(err=>{
-            console.log(err)
-            
-        })
-    
-    });
-
-
-=======
         res.json({"info": "make payment"});
         
     })
->>>>>>> backend
     
 }
 

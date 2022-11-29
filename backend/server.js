@@ -33,10 +33,10 @@ MongoClient.connect(url, async(err, db) => {
     lms.getParticipant(accounts[0],{from: accounts[0]}).then(async(info) =>{
         var ownerName = info[0];
         var ownerAddress = accounts[0];
-        var password = 12345;
+        var password = "12345";
         var intialAmount = web3.utils.fromWei(await web3.eth.getBalance(ownerAddress), 'ether');
-
-        var personInfo = {id: 0, name: ownerName, password: password, amount:intialAmount, address: ownerAddress}
+        var floatAmount = parseFloat(intialAmount);
+        var personInfo = {id: 0, name: ownerName, password: password, amount:floatAmount, address: ownerAddress}
 
         dbe.collection("Users").findOne({"address": ownerAddress}, (err, doc) =>{
             if (! doc){
