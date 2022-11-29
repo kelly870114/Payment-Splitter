@@ -14,7 +14,15 @@ function routes(app, dbe, lms, accounts, web3){
     app.post('/createAccount', async (req, res) =>{
         var accountName = req.body.name;
         var password = req.body.password;
-        var accountid = req.body.id;
+        var accountid = HASHMAP[accountName];
+
+
+        console.log(accountName);
+        if (accountName != "amy" && accountName != "sherry" && accountName != "alan" && accountName != "byron" && accountName != "lance" && accountName != "ginny"){
+            res.status(400);
+            res.json([{"info": "Create User Fail: Not in HASHMAP!"}]);
+        }
+
         var address = (accounts[accountid]);
         const getAmount = async () => {
             const balance = web3.utils.fromWei(
@@ -23,25 +31,35 @@ function routes(app, dbe, lms, accounts, web3){
             );
             return balance;
         }
-
         const initialAmount = await getAmount();
-
         var personInfo = {id: accountid, name: accountName, password:password, amount:initialAmount, address: address};
-        lms.createParticipant(accountName, address, {from: accounts[0]})
-            .then(()=>{
-                db.insertOne(personInfo, (err, doc)=>{
-                    if (err){
+
+        if (accountName){
+            db.findOne({"name": accountName}, (err, doc) =>{
+                if (doc){
+                    if (doc.name == accountName){
                         res.status(400);
-                        res.json([{"info": "Create User Fail!"}]);
-                    };
-                });
+                        res.json([{"info": "Create User Fail: Already exit!"}]);
+                    }
+                }
+                else{
+                    lms.createParticipant(accountName, address, {from: accounts[0]})
+                        .then(()=>{
+                            db.insertOne(personInfo, (err, doc)=>{
+                                if (err){
+                                    res.status(400);
+                                    res.json([{"info": "Create User Fail!"}]);
+                                };
+                            });
+                        })
+                        .catch(err=>{
+                            console.log(err)
+                        })
+                    res.status(200);
+                    res.json([{"info": "Create Account!"}]);
+                }  
             })
-            .catch(err=>{
-                console.log(err)
-                
-            })
-        res.status(200);
-        res.json([{"info": "Create Account!"}]);
+        }
   
     }); 
     
@@ -49,7 +67,7 @@ function routes(app, dbe, lms, accounts, web3){
         var accountName = req.body.name;
         var password = req.body.password;
         if (accountName){
-          dbo.findOne({"name": accountName}, (err, doc) =>{
+          db.findOne({"name": accountName}, (err, doc) =>{
               if (doc){
                   if (doc.password == password){
                       res.status(200);
@@ -58,12 +76,14 @@ function routes(app, dbe, lms, accounts, web3){
                       res.status(400);
                       res.json({"info": "Wrong Password!"})
                   }   
-              }else{
+              }
+              else{
                   res.status(400);
                   res.json({"info": "No user!"});
               }
           })
-        }else{
+        }
+        else{
           res.status(400)
           res.json({"info": "Wrong input"})
         }
@@ -83,12 +103,10 @@ function routes(app, dbe, lms, accounts, web3){
     app.get('/showParticipant/:id', (req, res) => {
         id = req.params.id;
         address  = accounts[id];
-        lms.getParticipantName(address)
-            .then((name)=>{
-                
-                console.log([{"Name":name, "address":address}]);
+        lms.getParticipant(address)
+            .then((info)=>{
                 res.status(200);
-                res.json([{"Name":name, "address":address}]);
+                res.json([{"Name":info[0], "Balance": info[1].words[0],"Address":info[2]}]);
             })
             .catch(err=>{
                 console.log(err)
