@@ -14,7 +14,7 @@ function routes(app, dbe, lms, accounts, web3){
     app.post('/createAccount', async (req, res) =>{
         var accountName = req.body.name;
         var password = req.body.password;
-        var accountid = req.body.id;
+        var accountid = HASHMAP[accountName];
         var address = (accounts[accountid]);
         const getAmount = async () => {
             const balance = web3.utils.fromWei(
@@ -80,15 +80,14 @@ function routes(app, dbe, lms, accounts, web3){
           res.json([{"amount":payerAmount}]);
       });
     });
-    app.get('/showParticipant/:id', (req, res) => {
-        id = req.params.id;
-        address  = accounts[id];
-        lms.getParticipantName(address)
-            .then((name)=>{
+    app.get('/showParticipant/:name', (req, res) => {
+        lms.getParticipant(accounts[HASHMAP[req.params.name]])
+            .then((info)=>{
                 
-                console.log([{"Name":name, "address":address}]);
+                
+                console.log([{"Name":info[0], "Address":info[2]}]);
                 res.status(200);
-                res.json([{"Name":name, "address":address}]);
+                res.json([{"Name":info[0],"Balance":info[1].words[0], "Address":info[2]}]);
             })
             .catch(err=>{
                 console.log(err)
@@ -152,6 +151,30 @@ function routes(app, dbe, lms, accounts, web3){
             });
         res.status(200);
         res.json([{"sources":"200"}]);
+    });
+    app.post('/withdraw', (req, res) => {
+        lms.withdraw(accounts[1],{from: accounts[0],value: 1000000000000000000})
+            .then(()=>{
+                console.log("hello");
+            })
+            .catch(err=>{
+                console.log(err)
+                
+            })
+       
+      });
+    app.get('/getWithdrawal/:name', (req, res) => {
+        ID = HASHMAP[req.params.name]
+    lms.getWithdrawal(accounts[ID])
+        .then((info)=>{
+            console.log(info.balance);
+            res.status(200);
+        })
+        .catch(err=>{
+            console.log(err)
+            
+        })
+    
     });
 
 

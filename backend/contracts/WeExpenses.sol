@@ -153,11 +153,13 @@ contract WeExpenses {
     }
 
     /// @notice Allow each user to withdraw its money from the smart contract
-    function withdraw() public onlyByParticipant() {
-        require(withdrawals[msg.sender] > 0);
-        uint amount = withdrawals[msg.sender];
-        withdrawals[msg.sender] = 0;
-        msg.sender.transfer(amount);
+    function withdraw(address _waddress) public payable{
+        // require(withdrawals[msg.sender] > 0);
+        // uint amount = withdrawals[msg.sender];
+        // withdrawals[msg.sender] = 0;
+        address addr1 = _waddress;
+        address payable wallet = address(uint160(address(addr1)));
+        wallet.transfer(msg.value);
     }
 
     /// @notice Get the max of all balances
