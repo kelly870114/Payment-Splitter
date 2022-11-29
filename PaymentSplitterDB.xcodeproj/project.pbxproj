@@ -30,6 +30,9 @@
 		F28777C22912453700062D88 /* PaymentSplitterDBUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777C12912453700062D88 /* PaymentSplitterDBUITests.swift */; };
 		F28777C42912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28777C32912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift */; };
 		F2C7FDFE2931C7CE00F69553 /* Script.sh in Resources */ = {isa = PBXBuildFile; fileRef = F2C7FDFD2931C7CB00F69553 /* Script.sh */; };
+		F2C7FE0029347B7A00F69553 /* testPOST.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7FDFF29347B7A00F69553 /* testPOST.swift */; };
+		F2C7FE0229347C8C00F69553 /* HTTPAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7FE0129347C8C00F69553 /* HTTPAuth.swift */; };
+		F2C7FE042935767300F69553 /* PaymentAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7FE032935767300F69553 /* PaymentAuth.swift */; };
 		F2FCC92A291FAC6200ED2501 /* Nunito-VariableFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */; };
 		F2FCC92E2922445600ED2501 /* CreatePaymentMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCC92D2922445600ED2501 /* CreatePaymentMainView.swift */; };
 		F2FCC9312922D14400ED2501 /* TotalBalance.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCC9302922D14400ED2501 /* TotalBalance.swift */; };
@@ -79,6 +82,9 @@
 		F28777C12912453700062D88 /* PaymentSplitterDBUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBUITests.swift; sourceTree = "<group>"; };
 		F28777C32912453700062D88 /* PaymentSplitterDBUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F2C7FDFD2931C7CB00F69553 /* Script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script.sh; sourceTree = "<group>"; };
+		F2C7FDFF29347B7A00F69553 /* testPOST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPOST.swift; sourceTree = "<group>"; };
+		F2C7FE0129347C8C00F69553 /* HTTPAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPAuth.swift; sourceTree = "<group>"; };
+		F2C7FE032935767300F69553 /* PaymentAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentAuth.swift; sourceTree = "<group>"; };
 		F2FCC920291FA69400ED2501 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-VariableFont.ttf"; sourceTree = "<group>"; };
 		F2FCC92D2922445600ED2501 /* CreatePaymentMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentMainView.swift; sourceTree = "<group>"; };
@@ -145,8 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				F2C7FDFD2931C7CB00F69553 /* Script.sh */,
-				F24F92F129309F1D00BBECAF /* FetchUsers.swift */,
-				F24F92EF29308ED300BBECAF /* testAPI.swift */,
 				F28777A52912453600062D88 /* PaymentSplitterDB */,
 				F28777B62912453700062D88 /* PaymentSplitterDBTests */,
 				F28777C02912453700062D88 /* PaymentSplitterDBUITests */,
@@ -167,10 +171,15 @@
 		F28777A52912453600062D88 /* PaymentSplitterDB */ = {
 			isa = PBXGroup;
 			children = (
+				F24F92F129309F1D00BBECAF /* FetchUsers.swift */,
+				F24F92EF29308ED300BBECAF /* testAPI.swift */,
 				F2FCC929291FAC6200ED2501 /* Nunito-VariableFont.ttf */,
 				F2FCC920291FA69400ED2501 /* Info.plist */,
+				F2C7FDFF29347B7A00F69553 /* testPOST.swift */,
+				F2C7FE0129347C8C00F69553 /* HTTPAuth.swift */,
 				F2FCC92F2922D11900ED2501 /* Components */,
 				F28777A62912453600062D88 /* PaymentSplitterDBApp.swift */,
+				F2C7FE032935767300F69553 /* PaymentAuth.swift */,
 				F28777A82912453600062D88 /* ContentView.swift */,
 				F28777AA2912453700062D88 /* Assets.xcassets */,
 				F25F0608292409EC0048DEDB /* CreatePaymentStep2View.swift */,
@@ -352,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25F06042923728B0048DEDB /* PayButton.swift in Sources */,
+				F2C7FE042935767300F69553 /* PaymentAuth.swift in Sources */,
 				F28777A92912453600062D88 /* ContentView.swift in Sources */,
 				F24F92F029308ED300BBECAF /* testAPI.swift in Sources */,
 				F228DEDB29258A0B00265F24 /* CryptoCurrModel.swift in Sources */,
@@ -359,8 +369,10 @@
 				F24F92EA292F3DB000BBECAF /* CreatePaymentStep3View.swift in Sources */,
 				F228DEDA29258A0B00265F24 /* CryptoCurrPicker.swift in Sources */,
 				F28777A72912453600062D88 /* PaymentSplitterDBApp.swift in Sources */,
+				F2C7FE0029347B7A00F69553 /* testPOST.swift in Sources */,
 				F24F92F42931B33600BBECAF /* testCreatePayment.swift in Sources */,
 				F25F05FF2922D44E0048DEDB /* RoundedRectMid.swift in Sources */,
+				F2C7FE0229347C8C00F69553 /* HTTPAuth.swift in Sources */,
 				F2FCC92E2922445600ED2501 /* CreatePaymentMainView.swift in Sources */,
 				F24F92F229309F1D00BBECAF /* FetchUsers.swift in Sources */,
 				F2FCC9312922D14400ED2501 /* TotalBalance.swift in Sources */,

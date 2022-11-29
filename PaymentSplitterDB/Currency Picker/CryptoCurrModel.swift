@@ -52,12 +52,12 @@ struct CryptoCurr: Hashable {
                     }
                 }
                 catch {
-                  print("Parsing country json failed.")
+                  print("Parsing json failed.")
                 }
                 
             }
         } else {
-            print("SwiftCountryPicker Bundle not able to locate.")
+            print("Bundle not able to locate.")
         }
         
         return cryptos

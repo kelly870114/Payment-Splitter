@@ -46,7 +46,10 @@ struct ContentView: View {
                             TotalBalance()
                             
                             HStack{
-                                Button(action: {print("HI")}) {
+                                
+                                
+                                
+                                NavigationLink(destination: testCreatePayment()) {
                                     VStack{
                                         Image("AddExpense")
                                             .resizable()
@@ -58,8 +61,10 @@ struct ContentView: View {
                                     }
                                     //Action
                                 }
+                                .navigationBarBackButtonHidden(true)
                                 .padding(.leading, 40)
                                 .padding(.top, 10)
+                                
                                 Spacer()
                                 NavigationLink(destination: CreatePaymentMainView()) {
                                     VStack{
@@ -76,9 +81,9 @@ struct ContentView: View {
                                 .navigationBarBackButtonHidden(true)
                                 .padding(.top, 10)
                                 Spacer()
-                                Button(action: {print("HI")}) {
+                                NavigationLink(destination: testPOST()) {
                                     VStack{
-                                        Image("Withdraw")
+                                        Image("CreatePayment")
                                             .resizable()
                                             .aspectRatio(100/95, contentMode: .fit)
                                             .frame(width: 40)
@@ -95,7 +100,6 @@ struct ContentView: View {
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height*0.45)
-                    .background(Color.pink)
                     //Get Activity
                     VStack(alignment: .leading){
                         Text("All Activity")

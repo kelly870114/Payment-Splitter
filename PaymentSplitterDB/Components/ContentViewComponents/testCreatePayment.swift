@@ -7,8 +7,7 @@
 
 import SwiftUI
 struct Users : Hashable, Codable {
-    //let name: String
-    let amount: String
+    let amount: Int
 }
 
 class PaymentViewModel: ObservableObject{
@@ -17,6 +16,7 @@ class PaymentViewModel: ObservableObject{
         guard let url = URL(string: "http://localhost:8082/showAmount/Will") else{
             return
         }
+        
         let task = URLSession.shared.dataTask(with: url){
             [weak self] data, _, error in
             guard let data = data, error == nil else {
@@ -41,16 +41,20 @@ struct testCreatePayment: View {
     
     var body: some View {
         NavigationView{
-            
-            List{
-                
+            VStack {
+                Text("Console 去哪了")
+                            .padding()
+                            .onTapGesture(perform: {
+                                print(paymentViewModel.users)
+                            })
                 ForEach(paymentViewModel.users, id: \.self) {
                     user in
                     HStack {
                         Image("")
                             .frame(width: 130, height: 70)
                             .background(Color.gray)
-                        Text(user.amount)
+                        
+                        Text("\(user.amount)")
                             .bold()
                     }
                     .padding(3)
@@ -58,7 +62,7 @@ struct testCreatePayment: View {
             }
             .navigationTitle("Users")
             .onAppear(){
-                paymentViewModel.fetch()
+                           paymentViewModel.fetch()
             }
         }
         

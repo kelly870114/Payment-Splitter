@@ -20,5 +20,385 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D22CE092-7313-493C-802F-D9D51030846E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "testCreatePayment"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "D22CE092-7313-493C-802F-D9D51030846E - 5804ac34c5063425"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of PaymentSplitterDB.testCreatePayment.paymentViewModel : PaymentSplitterDB.PaymentViewModel"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "D22CE092-7313-493C-802F-D9D51030846E - c83c587af204d024"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testCreatePayment.paymentViewModel.getter : PaymentSplitterDB.PaymentViewModel"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "D22CE092-7313-493C-802F-D9D51030846E - d1b1db440b393599"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testCreatePayment.$paymentViewModel.getter : SwiftUI.ObservedObject&lt;PaymentSplitterDB.PaymentViewModel&gt;.Wrapper"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "D22CE092-7313-493C-802F-D9D51030846E - d8e5c76e55befb33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testCreatePayment.init() -&gt; PaymentSplitterDB.testCreatePayment"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8C9DA2D-8103-4B6D-BE21-4419B82899A1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "B8C9DA2D-8103-4B6D-BE21-4419B82899A1 - a6cb818e33589b36"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;PaymentSplitterDB.Course&gt;, PaymentSplitterDB.Course, &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in PaymentSplitterDB.testAPI.body.getter : some"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "B8C9DA2D-8103-4B6D-BE21-4419B82899A1 - 3b31f74873440e6c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PaymentSplitterDB.Course) -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;PaymentSplitterDB.Course&gt;, PaymentSplitterDB.Course, &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in PaymentSplitterDB.testAPI.body.getter : some"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EBB8FB66-30E4-48CE-8C67-295918B95908"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "testAPI"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "EBB8FB66-30E4-48CE-8C67-295918B95908 - a2ce7cbe7e9221c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of PaymentSplitterDB.testAPI.viewModel : PaymentSplitterDB.ViewModel"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "EBB8FB66-30E4-48CE-8C67-295918B95908 - b7dbbe96f219c53c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testAPI.viewModel.getter : PaymentSplitterDB.ViewModel"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "EBB8FB66-30E4-48CE-8C67-295918B95908 - ff1f460578a2bf7f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testAPI.$viewModel.getter : SwiftUI.ObservedObject&lt;PaymentSplitterDB.ViewModel&gt;.Wrapper"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "EBB8FB66-30E4-48CE-8C67-295918B95908 - 535c3cd47fbd7250"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testAPI.init() -&gt; PaymentSplitterDB.testAPI"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5421E56-2297-4C4E-86D4-86E4734BF7A1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E5421E56-2297-4C4E-86D4-86E4734BF7A1 - 657056b1c74d438c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PaymentSplitterDB.ViewModel.fetch() -&gt; ()"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "E5421E56-2297-4C4E-86D4-86E4734BF7A1 - 657056b1c74d438c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in PaymentSplitterDB.ViewModel.fetch() -&gt; ()"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "360">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "894224CE-74CF-42ED-A14C-73A421BE2B6C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "894224CE-74CF-42ED-A14C-73A421BE2B6C - 108ceac0bc495929"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.ViewModel.fetch() -&gt; ()"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "894224CE-74CF-42ED-A14C-73A421BE2B6C - 108ceac0bc495929"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.ViewModel.fetch() -&gt; ()"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/testAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "276">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E066770E-6DB9-4AD1-A277-94CE9F9EC4C4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "testCreatePayment"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "E066770E-6DB9-4AD1-A277-94CE9F9EC4C4 - d8e5c76e55befb33"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testCreatePayment.init() -&gt; PaymentSplitterDB.testCreatePayment"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "E066770E-6DB9-4AD1-A277-94CE9F9EC4C4 - d1e852f29093d24c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PaymentSplitterDB.testCreatePayment.init(paymentViewModel: @autoclosure () -&gt; PaymentSplitterDB.PaymentViewModel) -&gt; PaymentSplitterDB.testCreatePayment"
+                  moduleName = "PaymentSplitterDB"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ginnyhuang/Documents/PaymentSplitterDB/PaymentSplitterDB/Components/ContentViewComponents/testCreatePayment.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "8">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1409665B-643D-42F3-A2C2-640F6247EC61"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E08A532-78A0-4A5E-9657-0ED71C8CE7F4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "testAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "fetch()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

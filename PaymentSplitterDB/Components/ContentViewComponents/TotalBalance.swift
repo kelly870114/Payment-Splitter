@@ -8,19 +8,30 @@
 import SwiftUI
 
 struct TotalBalance: View {
+    @StateObject var paymentViewModel = PaymentViewModel()
     var body: some View {
         var FontSmall : Font = Font.custom("Nunito", size: 16)
         var FontLarge : Font = Font.custom("Nunito", size: 30)
+        
         //GeometryReader{ geometry in
             HStack{
                 VStack(alignment: .leading){
                     Text("Total Balance")
                         .font(FontSmall)
                         .foregroundColor(Color.white)
-                    Text("500,000")
-                        .font(FontLarge)
-                        .fontWeight(.bold)
-                        .foregroundColor(Color.white)
+                    ForEach(paymentViewModel.users, id: \.self) {
+                        user in
+                        HStack {
+                            
+                            Text("\(user.amount)")
+                                .font(FontLarge)
+                                .fontWeight(.bold)
+                                .foregroundColor(Color.white)
+                        }
+                    }
+                }
+                .onAppear(){
+                    paymentViewModel.fetch()
                 }
                 .padding()
                 .frame(width: UIScreen.main.bounds.width * 0.45)
