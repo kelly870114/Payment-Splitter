@@ -6,6 +6,8 @@ const HASHMAP = {
     "lance": 4,
     "ginny": 5
 } 
+const { resolveSoa } = require('dns');
+const { setTimeout } = require('timers/promises');
 
 function routes(app, dbe, lms, accounts, web3){
     let db = dbe.collection("Users")
@@ -98,7 +100,7 @@ function routes(app, dbe, lms, accounts, web3){
   
     app.post('/createExpense',(req, res) =>{
         var title = req.body.title;
-        var amount = req.body.amount;
+        var amount = req.body.amount.toString();
         var date = req.body.date;
         var payer = req.body.payer;
         var payees = req.body.payees;
@@ -113,43 +115,118 @@ function routes(app, dbe, lms, accounts, web3){
         lms.createExpense(title, amount, date, payeesAddress, {from: payerAddress})
             .then(() =>{
                 console.log('Create Expense');
+                lms.getExpenseID({from: payerAddress})
+                    .then((info)=>{
+                        console.log(info)
+                        const currentExpenseID = info.words[0];
+                        console.log('currentExpense ID', currentExpenseID);
+                        res.status(200);
+                        res.json({"info": "Create Expense Successful!", "expenseID": currentExpenseID});
+                    })
+                    .catch((err) =>{
+                        console.log(err);
+                        res.status(400);
+                        res.json({"info": "Fail to create expense" });
+                     })
+            
             })
             .catch((err) =>{
                 console.log(err);
+                res.status(400);
+                res.json({"info": "Fail to create expense" });
         })
 
-        lms.getExpenseID({from: payerAddress})
-            .then((info)=>{
-                const currentExpenseID = info.words[0];
-                console.log("Current ID is ", currentExpenseID);
+        
+        
+        
+
+    })
+
+    app.post('/agree',(req, res) =>{
+        var agreeName = req.body.name;
+        var expenseID = req.body.expenseID;
+
+        var agreeAddress = accounts[HASHMAP[agreeName]];
+
+        lms.setAgreement(expenseID, true, {from: agreeAddress, gas:3000000})
+            .then(() =>{
+                console.log("success")
             })
             .catch((err) =>{
                 console.log(err);
             })
 
         res.status(200);
-        res.json({"info": "Great!"});
+        res.json({"info":`${agreeName} agree expense ${expenseID}`});
+    })
+
+    app.get('/getAllParticipants', (req, res) =>{
+
+        db.find({}, {'name': true}).toArray(function(err, results) {
+            var checker = accounts[0];
+            var participants = [];
+            results.forEach((p) =>{
+                participants.push(p.name);
+            });
+            var checkerAddress = accounts[HASHMAP[checker]];
+            var participantsAddress = [];
+
+            participants.forEach((p) =>{
+                participantsAddress.push(accounts[HASHMAP[p]]);
+            });
+
+            lms.getAllParticipants(participantsAddress, {from: checkerAddress})
+            .then((info) =>{
+
+                const balanceObject = []
+
+                for(var i = 0; i < participants.length; i++){
+                    var balance = BigInt(info[1][i]).toString()
+                    balanceObject.push({'name':participants[i], 'balance':balance })
+                }
+                res.status(200);
+                res.json({"info": "check all participants successful", "balanceInfo":balanceObject});
+
+
+            })
+            .catch((err) =>{
+                console.log(err)
+                res.status(400);
+                res.json({"info":"Fail to view all participants"});
+            })
+
+        });
 
     })
 
     app.post('/createPayment', (req, res) => {
-        payer = req.body.payer;
-        payee = req.body.payee;
-        amount = req.body.amount;
-        increase = amount;
-        decrease = -amount;
-        console.log(payer);
-        var whereStr = {"name":payer};
-        var updateStr = {$inc: { "amount" : decrease}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-            if (err) throw err;
-        });
-        var whereStr = {"name":payee};
-        var updateStr = {$inc: { "amount" : increase}};
-        db.updateOne(whereStr, updateStr, function(err, res) {
-                if (err) throw err;
-            });
+        var payer = req.body.payer;
+        var payee = req.body.payee;
+        var title = req.body.title;
+        var amount = req.body.amount;
+
+        var payerAddress = accounts[HASHMAP[payer]];
+        var payeeAddress = accounts[HASHMAP[payee]];
+
+        lms.createPayment(title, payeeAddress, {from: payerAddress, value: amount, gas:3000000})
+            .then((info) =>{
+                console.log('create payment');
+                console.log(info)
+                lms.withdraw({from: payeeAddress})
+                    .then((info)=>{
+                        console.log("with draw successful");
+                        console.log(info);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+        
         res.status(200);
+<<<<<<< HEAD
         res.json([{"sources":"200"}]);
     });
     app.post('/withdraw', (req, res) => {
@@ -178,6 +255,11 @@ function routes(app, dbe, lms, accounts, web3){
     });
 
 
+=======
+        res.json({"info": "make payment"});
+        
+    })
+>>>>>>> backend
     
 }
 
