@@ -1,5 +1,5 @@
 // Allows us to use ES6 in our migrations and tests.
-contracts_directory: '/Users/topang/Desktop/paymentsplitterdb/backend/contracts',
+contracts_directory: '/Users/wei-tingho/paymentsplitterdb/backend/contracts',
 require('babel-register')({
   ignore: /node_modules\/(?!zeppelin-solidity\/test\/helpers)/
 });
