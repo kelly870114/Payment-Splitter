@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SplitGroup: View {
     @Binding public var amount : Float
-    @State public var note = ""
+    @Binding public var title : String
     var textFieldBorder: some View {
         RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Color.white)
     }
@@ -20,7 +20,7 @@ struct SplitGroup: View {
         var FontLarge : Font = Font.custom("Nunito", size: 30)
         
         VStack{
-            TextField("Placeholder", text: $note, prompt: Text("Enter Title"))
+            TextField("Placeholder", text: $title, prompt: Text("Enter Title"))
                 .frame(width: 275)
                   .textFieldStyle(PlainTextFieldStyle())
                   .multilineTextAlignment(.leading)
@@ -48,6 +48,6 @@ struct SplitGroup: View {
 
 struct SplitGroup_Previews: PreviewProvider {
     static var previews: some View {
-        SplitGroup(amount: .constant(0))
+        SplitGroup(amount: .constant(0), title: .constant(""))
     }
 }

@@ -35,6 +35,7 @@
 		F29566E0293865B400377201 /* testMultiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29566DF293865B400377201 /* testMultiPicker.swift */; };
 		F29566E4293870ED00377201 /* CreateExpenseMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29566E3293870ED00377201 /* CreateExpenseMainView.swift */; };
 		F29566E62938880300377201 /* ExpenseAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29566E52938880300377201 /* ExpenseAuth.swift */; };
+		F29566E8293890E400377201 /* CreateExpenseStep2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29566E7293890E400377201 /* CreateExpenseStep2View.swift */; };
 		F2C5A2D12936C07800C34948 /* PaymentSplitterDBApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C5A2D02936C07800C34948 /* PaymentSplitterDBApp.swift */; };
 		F2C7FDFE2931C7CE00F69553 /* Script.sh in Resources */ = {isa = PBXBuildFile; fileRef = F2C7FDFD2931C7CB00F69553 /* Script.sh */; };
 		F2C7FE0029347B7A00F69553 /* testPOST.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C7FDFF29347B7A00F69553 /* testPOST.swift */; };
@@ -94,6 +95,7 @@
 		F29566DF293865B400377201 /* testMultiPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testMultiPicker.swift; sourceTree = "<group>"; };
 		F29566E3293870ED00377201 /* CreateExpenseMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExpenseMainView.swift; sourceTree = "<group>"; };
 		F29566E52938880300377201 /* ExpenseAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseAuth.swift; sourceTree = "<group>"; };
+		F29566E7293890E400377201 /* CreateExpenseStep2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExpenseStep2View.swift; sourceTree = "<group>"; };
 		F2C5A2D02936C07800C34948 /* PaymentSplitterDBApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSplitterDBApp.swift; sourceTree = "<group>"; };
 		F2C7FDFD2931C7CB00F69553 /* Script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script.sh; sourceTree = "<group>"; };
 		F2C7FDFF29347B7A00F69553 /* testPOST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testPOST.swift; sourceTree = "<group>"; };
@@ -215,10 +217,13 @@
 				F2FCC92F2922D11900ED2501 /* Components */,
 				F2C7FE032935767300F69553 /* PaymentAuth.swift */,
 				F28777A82912453600062D88 /* ContentView.swift */,
+				F29566E52938880300377201 /* ExpenseAuth.swift */,
 				F28777AA2912453700062D88 /* Assets.xcassets */,
+				F29566E3293870ED00377201 /* CreateExpenseMainView.swift */,
 				F2FCC92D2922445600ED2501 /* CreatePaymentMainView.swift */,
 				F25F0608292409EC0048DEDB /* CreatePaymentStep2View.swift */,
 				F24F92E9292F3DB000BBECAF /* CreatePaymentStep3View.swift */,
+				F29566E7293890E400377201 /* CreateExpenseStep2View.swift */,
 				F24F92E7292AD1E700BBECAF /* TextFieldStyle.swift */,
 				F2C5A2D02936C07800C34948 /* PaymentSplitterDBApp.swift */,
 				F28777AC2912453700062D88 /* Preview Content */,
@@ -254,12 +259,10 @@
 		F2FCC92F2922D11900ED2501 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				F29566E3293870ED00377201 /* CreateExpenseMainView.swift */,
 				F22B567729384ED5001557F9 /* CreateExpenseComponents */,
 				F25F0600292359A50048DEDB /* CreatePaymentComponents */,
 				F25F05FB2922D3890048DEDB /* ContentViewComponents */,
 				F25F05FE2922D44E0048DEDB /* RoundedRectMid.swift */,
-				F29566E52938880300377201 /* ExpenseAuth.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				F22B568329385078001557F9 /* ParticipantPickerModel.swift in Sources */,
 				F228DED529256F8400265F24 /* TransferTo.swift in Sources */,
 				F25F05FD2922D3B80048DEDB /* History.swift in Sources */,
+				F29566E8293890E400377201 /* CreateExpenseStep2View.swift in Sources */,
 				F25F0609292409EC0048DEDB /* CreatePaymentStep2View.swift in Sources */,
 				F24F92E8292AD1E700BBECAF /* TextFieldStyle.swift in Sources */,
 				F22B568129385032001557F9 /* ParticipantPicker.swift in Sources */,

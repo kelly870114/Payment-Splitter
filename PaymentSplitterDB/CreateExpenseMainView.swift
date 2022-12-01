@@ -10,6 +10,7 @@ import SwiftUI
 struct CreateExpenseMainView: View {
     @State private var answer : Bool = false
     @State private var amount : Float = 0
+    @State private var title = ""
     @ObservedObject var manager = ExpenseAuth()
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,.font : UIFont(name: "Nunito-Bold", size: 30)!]
@@ -18,7 +19,7 @@ struct CreateExpenseMainView: View {
     var FontSmall : Font = Font.custom("Nunito", size: 16)
     var FontRegular : Font = Font.custom("Nunito", size: 20)
     var FontLarge : Font = Font.custom("Nunito", size: 30)
-    var payees : [String] = ["Sherry", "Amy", "Ginny", "Alan"]
+    var payees : [String] = ["amy", "ginny", "alan"]
     var body: some View {
         
         GeometryReader{ geometry in
@@ -27,7 +28,7 @@ struct CreateExpenseMainView: View {
                     RoundedRectMid()
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.9).ignoresSafeArea()
                     VStack{
-                        SplitGroup(amount: self.$amount)
+                        SplitGroup(amount: self.$amount, title: self.$title)
                     }
                     .padding(.top, 80.0)
                 }
@@ -35,9 +36,9 @@ struct CreateExpenseMainView: View {
                 
                 
                 VStack(alignment: .leading){
-                    NavigationLink(destination: CreatePaymentStep3View(), isActive: $answer, label: {
+                    NavigationLink(destination: ContentView(), isActive: $answer, label: {
                         Button(action: {
-                            self.manager.expensePostAuth(title:"Food", payer: "sherry", payees: payees, amount: self.amount, date: Date()); self.answer = true
+                            self.manager.expensePostAuth(title: self.title, payer: "sherry", payees: payees, amount: self.amount, date: 20221130); self.answer = true
                                 }, label: {
                                         Text("Confirm")
                                         .font(FontRegular)
@@ -57,7 +58,7 @@ struct CreateExpenseMainView: View {
                 
             }
         }
-        .navigationBarTitle(Text("Expense").font(FontLarge), displayMode: .inline)
+        .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         
     }

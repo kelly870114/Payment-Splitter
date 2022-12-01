@@ -16,7 +16,7 @@ class ExpenseAuth: ObservableObject {
 
     @Published var authenticated = false
 
-    func expensePostAuth(title: String, payer: String, payees: [String], amount: Float, date: Date) {
+    func expensePostAuth(title: String, payer: String, payees: [String], amount: Float, date: Int) {
         guard let url = URL(string: "http://localhost:8082/createExpense") else { return }
 
         let body: [String: Any] = ["title": title, "payer": payer, "payees": payees, "amount": amount, "date": date]
