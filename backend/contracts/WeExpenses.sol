@@ -14,8 +14,8 @@ contract WeExpenses {
     Participant is a person or an organization which is part of the group expense.
      */
     struct Participant {
-        string name;
-        address waddress;
+        string name; 
+        address waddress; 
         int balance;
         uint index;
     }
@@ -311,7 +311,7 @@ contract WeExpenses {
             if (expense.agreements[expense.payees[i]]) {
                 participants[expense.payees[i]].balance -= _portion;
             }   
-        }       
+        }
     }
   
     /// @notice Calculate the state of the balance after each new payement

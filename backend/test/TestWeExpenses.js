@@ -2,6 +2,9 @@ const WeExpenses = artifacts.require("WeExpenses");
 const assert = require("assert");
 const _deploy_contracts = require("../migrations/2_deploy_contracts");
 
+<<<<<<< HEAD
+contract('WeExpenses', )
+=======
 contract("WeExpenses", (account)=>{
     const BUYER = accounts[1];
 
@@ -12,3 +15,4 @@ contract("WeExpenses", (account)=>{
     })
 
 })
+>>>>>>> backend

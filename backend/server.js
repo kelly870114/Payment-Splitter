@@ -25,8 +25,6 @@ MongoClient.connect(url, async(err, db) => {
     // 智能合約的創立者 defatult 都給第一個account
     web3.eth.defaultAccount = accounts[0];
   
-
-
     const lms = await LMS.deployed();
 
     // 處史話智能合約擁有者資訊
@@ -61,4 +59,3 @@ MongoClient.connect(url, async(err, db) => {
     });
 
 });
-
