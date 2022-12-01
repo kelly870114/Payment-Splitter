@@ -11,7 +11,7 @@ struct TotalBalance: View {
     @StateObject var paymentViewModel = PaymentViewModel()
     var body: some View {
         var FontSmall : Font = Font.custom("Nunito", size: 16)
-        var FontLarge : Font = Font.custom("Nunito", size: 30)
+        var FontLarge : Font = Font.custom("Nunito", size: 28)
         
         //GeometryReader{ geometry in
             HStack{

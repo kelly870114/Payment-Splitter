@@ -49,7 +49,7 @@ struct ContentView: View {
                                 
                                 
                                 
-                                NavigationLink(destination: testCreatePayment()) {
+                                NavigationLink(destination: CreateExpenseMainView()) {
                                     VStack{
                                         Image("AddExpense")
                                             .resizable()
@@ -83,7 +83,7 @@ struct ContentView: View {
                                 Spacer()
                                 NavigationLink(destination: testPOST()) {
                                     VStack{
-                                        Image("CreatePayment")
+                                        Image("Withdraw")
                                             .resizable()
                                             .aspectRatio(100/95, contentMode: .fit)
                                             .frame(width: 40)

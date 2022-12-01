@@ -25,7 +25,7 @@ struct CreatePaymentStep3View: View {
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.9).ignoresSafeArea()
                     VStack(alignment: .center, spacing: 20){
                         
-                        Image("Step2")
+                        Image("Step3")
                             .resizable()
                             .frame(width:150, height: 25)
                             .padding(.top, 50)

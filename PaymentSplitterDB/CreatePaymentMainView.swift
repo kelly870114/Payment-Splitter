@@ -51,13 +51,7 @@ struct CreatePaymentMainView: View {
                 VStack(alignment: .leading){
                     HStack{
                         YouOweComponent()
-                            .frame(maxWidth: geometry.size.width*0.78, alignment: .leading)
-                        NavigationLink(destination: CreatePaymentStep2View()) {
-                            Image("PayButton")
-                                .resizable()
-                                .aspectRatio(100/100, contentMode: .fit)
-                                .frame(width: 40)
-                        }
+                        
                     }
                     
                         

@@ -10,7 +10,7 @@ import Foundation
 class testPaymentAPI: ObservableObject{
     @Published var users: [Users] = []
     func fetch() {
-        guard let url = URL(string: "http://localhost:8082/showAmount/Will") else{
+        guard let url = URL(string: "http://localhost:8082/showAmount/amy") else{
             return
         }
         

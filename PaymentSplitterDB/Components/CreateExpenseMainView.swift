@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct CreatePaymentStep2View: View {
+struct CreateExpenseMainView: View {
     @State private var answer : Bool = false
     @State private var amount : Float = 0
-    @ObservedObject var manager = PaymentAuth()
+    @ObservedObject var manager = ExpenseAuth()
     init() {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,.font : UIFont(name: "Nunito-Bold", size: 30)!]
     }
@@ -18,6 +18,7 @@ struct CreatePaymentStep2View: View {
     var FontSmall : Font = Font.custom("Nunito", size: 16)
     var FontRegular : Font = Font.custom("Nunito", size: 20)
     var FontLarge : Font = Font.custom("Nunito", size: 30)
+    var payees : [String] = ["Sherry", "Amy", "Ginny", "Alan"]
     var body: some View {
         
         GeometryReader{ geometry in
@@ -25,40 +26,18 @@ struct CreatePaymentStep2View: View {
                 ZStack(alignment: .topLeading){
                     RoundedRectMid()
                         .frame(width: geometry.size.width, height: geometry.size.height * 0.9).ignoresSafeArea()
-                    VStack(alignment: .center, spacing: 20){
-                        
-                        Image("Step2")
-                            .resizable()
-                            .frame(width:150, height: 25)
-                            .padding(.top, 50)
-                        TotalBalance()
-                        TransferTo(amount: self.$amount)
+                    VStack{
+                        SplitGroup(amount: self.$amount)
                     }
+                    .padding(.top, 80.0)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height*0.8 )
                 
                 
                 VStack(alignment: .leading){
-//                    Button(action: {
-//                        print(self.amount)
-//
-//                    }) {
-//
-//                        HStack{
-//                            Spacer()
-//                            Text("Confirm")
-//                            Spacer()
-//                        }
-//                        .accentColor(Color.white)
-//                        .padding(.vertical, 10)
-//                        .background(Color.red)
-//                        .cornerRadius(5)
-//                        .padding(.horizontal, 40)
-//
-//                    }
                     NavigationLink(destination: CreatePaymentStep3View(), isActive: $answer, label: {
                         Button(action: {
-                            self.manager.paymentPostAuth(title:"sherrytoAmy", payer: "sherry", payee: "amy", amount: self.amount); self.answer = true
+                            self.manager.expensePostAuth(title:"Food", payer: "sherry", payees: payees, amount: self.amount, date: Date()); self.answer = true
                                 }, label: {
                                         Text("Confirm")
                                         .font(FontRegular)
@@ -74,31 +53,18 @@ struct CreatePaymentStep2View: View {
 
                             })
                     })
-//                    NavigationLink(destination: CreatePaymentStep3View()) {
-//                        Text("Confirm")
-//                            .font(FontRegular)
-//                            .fontWeight (.bold)
-//                            .padding(10)
-//
-//                            .foregroundColor(Color.white)
-//                            .frame(width: geometry.size.width * 0.8)
-//                            .background(
-//                                RoundedRectangle(cornerRadius: 30).fill(Color("SecondColor"))
-//
-//                            )
-//                    }
                 }
                 
             }
         }
-        .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
+        .navigationBarTitle(Text("Expense").font(FontLarge), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         
     }
 }
 
-struct CreatePaymentStep2View_Previews: PreviewProvider {
+struct CreateExpenseMainView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePaymentStep2View()
+        CreateExpenseMainView()
     }
 }

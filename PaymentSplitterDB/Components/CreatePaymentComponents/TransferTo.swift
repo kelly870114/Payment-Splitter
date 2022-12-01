@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TransferTo: View {
-    @Binding public var amount : Int
+    @Binding public var amount : Float
     @State public var note = ""
     var textFieldBorder: some View {
         RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Color.white)

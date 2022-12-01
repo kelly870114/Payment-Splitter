@@ -1,8 +1,8 @@
 //
-//  paymentPOST.swift
+//  ExpenseAuth.swift
 //  PaymentSplitterDB
 //
-//  Created by 黃嬿羽 on 2022/11/28.
+//  Created by 黃嬿羽 on 2022/11/30.
 //
 
 import Foundation
@@ -12,14 +12,14 @@ import Combine
 //struct ServerMessage: Decodable {
 //   let res, message: String
 //}
-class PaymentAuth: ObservableObject {
+class ExpenseAuth: ObservableObject {
 
     @Published var authenticated = false
 
-    func paymentPostAuth(title: String, payer: String, payee: String, amount: Float) {
-        guard let url = URL(string: "http://localhost:8082/createPayment") else { return }
+    func expensePostAuth(title: String, payer: String, payees: [String], amount: Float, date: Date) {
+        guard let url = URL(string: "http://localhost:8082/createExpense") else { return }
 
-        let body: [String: Any] = ["title": title, "payer": payer, "payee": payee, "amount": amount]
+        let body: [String: Any] = ["title": title, "payer": payer, "payees": payees, "amount": amount, "date": date]
 
 
         let finalBody = try! JSONSerialization.data(withJSONObject: body)
