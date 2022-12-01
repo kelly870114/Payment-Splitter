@@ -101,7 +101,7 @@ function routes(app, dbe, lms, accounts, web3){
   
     app.post('/createExpense',(req, res) =>{
         var title = req.body.title;
-        var amount = req.body.amount.toString();
+        var amount = req.body.amount;
         var date = req.body.date;
         var payer = req.body.payer;
         var payees = req.body.payees;
@@ -112,8 +112,11 @@ function routes(app, dbe, lms, accounts, web3){
         payees.forEach((p) =>{
             payeesAddress.push(accounts[HASHMAP[p]]);
         });
+
+        var strAmount = amount.toString();
+        var weiAmount = web3.utils.toWei(strAmount, 'ether');
         
-        lms.createExpense(title, amount, date, payeesAddress, {from: payerAddress})
+        lms.createExpense(title, weiAmount, date, payeesAddress, {from: payerAddress})
             .then(() =>{
                 console.log('Create Expense');
                 lms.getExpenseID({from: payerAddress})
@@ -209,7 +212,11 @@ function routes(app, dbe, lms, accounts, web3){
         var payerAddress = accounts[HASHMAP[payer]];
         var payeeAddress = accounts[HASHMAP[payee]];
 
-        lms.createPayment(title, payeeAddress, {from: payerAddress, value: amount, gas:3000000})
+        var strAmount = amount.toString();
+        var weiAmount = web3.utils.toWei(strAmount, 'ether');
+        weiAmount = parseInt(weiAmount);
+
+        lms.createPayment(title, payeeAddress, {from: payerAddress, value: weiAmount, gas:3000000})
             .then(async(info) =>{
                 console.log('create payment');
                 

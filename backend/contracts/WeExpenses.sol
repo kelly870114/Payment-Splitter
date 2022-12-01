@@ -139,18 +139,15 @@ contract WeExpenses {
     /// @notice Create a Payment. Use this payable function send money to the smart contract.
     /// @param _title the title of the payment
     /// @param _payee the payee of the payment
-    function createPayment(string memory _title, address _payer, address _payee, uint256 _amount) public onlyByParticipant() payable {  
-        // payer要給payee錢
-        // address _payer = msg.sender;
-        // require(msg.value > 0);
+    function createPayment(string memory _title, address _payee) public onlyByParticipant() payable {   
+        address _payer = msg.sender;
+        require(msg.value > 0);
         require(_payee != _payer);
         require(isParticipant(_payer));
         require(isParticipant(_payee));
-        // Payment memory payment = Payment({title: _title, amount: msg.value, valueDate: now, payer: _payer, payee: _payee});
-        Payment memory payment = Payment({title: _title, amount: _amount, valueDate: now, payer: _payer, payee: _payee});
+        Payment memory payment = Payment({title: _title, amount: msg.value, valueDate: now, payer: _payer, payee: _payee});
         payments.push(payment);
-        // withdrawals[_payee] += msg.value;
-        withdrawals[_payee] += _amount;
+        withdrawals[_payee] += msg.value;
         syncBalancePayment(payment);
     }
 
