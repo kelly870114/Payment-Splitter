@@ -76,4 +76,3 @@ npm run start
 
 ## Collaboration
 <img width="1033" alt="螢幕快照 2022-12-02 下午20 33 18 下午" src="https://user-images.githubusercontent.com/39258998/205422983-811583ed-951b-454c-9277-131c2a331292.png">
-n
