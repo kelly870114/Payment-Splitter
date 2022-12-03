@@ -27,18 +27,26 @@ We also use MongoDB as our backup storage.
 cd /usr/local/mongodb/bin
 ./mongod --dbpath ~/data/db
 ```
-2. Run Ganache and open Ganache GUI
-```bash
-ganache-cli
+2. Go to the backend folder
 ```
-
-3. Run backend file
+cd backend
+```
+3. Run Ganache and open Ganache GUI
 ```bash
 cd backend
+ganache-cli
+```
+4. Migrate and Deploy smart contract
+```bash
+truffle migrate --reset 
+```
+
+5. Run backend file
+```bash
 npm run start
 ```
 
-4. Run the application by using Xcode
+6. Run the application by using Xcode
 
 ## Collaboration
 <img width="1033" alt="螢幕快照 2022-12-02 下午20 33 18 下午" src="https://user-images.githubusercontent.com/39258998/205422983-811583ed-951b-454c-9277-131c2a331292.png">
