@@ -67,7 +67,7 @@ truffle migrate --reset
 <img width="578" alt="截圖 2022-12-02 下午9 56 04" src="https://user-images.githubusercontent.com/31930515/205426791-52d25451-4cde-45a5-9313-01eef33d10bd.png">
 
 
-5. Run backend file
+5. Run Backend Api Server
 ```bash
 npm run start
 ```
