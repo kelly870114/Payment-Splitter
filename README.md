@@ -33,13 +33,17 @@ cd backend
 ```
 3. Run Ganache and open Ganache GUI
 ```bash
-cd backend
 ganache-cli
 ```
+<img width="570" alt="截圖 2022-12-02 下午9 52 13" src="https://user-images.githubusercontent.com/31930515/205426732-32a872fd-04ca-4af7-b678-f7047aafad35.png">
+
+
 4. Migrate and Deploy smart contract
 ```bash
 truffle migrate --reset 
 ```
+<img width="578" alt="截圖 2022-12-02 下午9 56 04" src="https://user-images.githubusercontent.com/31930515/205426791-52d25451-4cde-45a5-9313-01eef33d10bd.png">
+
 
 5. Run backend file
 ```bash
