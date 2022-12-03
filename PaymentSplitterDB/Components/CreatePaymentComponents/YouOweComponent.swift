@@ -82,7 +82,7 @@ struct YouOweComponent: View {
                     VStack{
                         Text(currency)
                             .font(FontMini)
-                        Text("20.54")
+                        Text("2.0")
                             .font(FontRegular)
                             .fontWeight(.bold)
                     }

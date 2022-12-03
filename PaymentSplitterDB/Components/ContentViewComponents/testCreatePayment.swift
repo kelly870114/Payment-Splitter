@@ -13,7 +13,7 @@ struct Users : Hashable, Codable {
 class PaymentViewModel: ObservableObject{
     @Published var users: [Users] = []
     func fetch() {
-        guard let url = URL(string: "http://localhost:8082/showAmount/amy") else{
+        guard let url = URL(string: "http://localhost:8082/showAmount/sherry") else{
             return
         }
         

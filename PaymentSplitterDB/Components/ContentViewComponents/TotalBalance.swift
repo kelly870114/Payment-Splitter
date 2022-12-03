@@ -40,14 +40,15 @@ struct TotalBalance: View {
                 Spacer()
                 HStack(alignment: .center){
                     VStack{
-                        Image("Bitcoin")
+                        Image("ETH")
                             .resizable()
+                            .background(Color.white)
                             .frame(width: 50, height: 50)
                             .clipShape(Circle())
                             .padding(.top)
                         Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: Text("CryptoCurrency")) {
-                            Text("Bitcoin").tag(1)
-                            Text("Ethereum").tag(2)
+                            Text("Ethereum").tag(1)
+                            Text("Bitcoin").tag(2)
                         }
                         .accentColor(Color.white)
                         .padding(.top, -10)

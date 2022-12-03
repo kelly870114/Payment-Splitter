@@ -31,7 +31,7 @@ struct TransferResult: View {
                 .font(FontSmall)
                 .foregroundColor(Color.white)
                 .fontWeight(.bold)
-            Text("Bitcoin 200.00")
+            Text("Ethereum 2.0")
                 .font(FontRegular)
                 .foregroundColor(Color.white)
                 .fontWeight(.bold)

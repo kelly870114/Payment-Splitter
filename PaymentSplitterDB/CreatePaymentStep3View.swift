@@ -31,6 +31,19 @@ struct CreatePaymentStep3View: View {
                             .padding(.top, 50)
                         TotalBalance()
                         TransferResult()
+                        NavigationLink(destination: ContentView()){
+                            Text("Home")
+                            .font(FontRegular)
+                            .fontWeight (.bold)
+                            .padding(10)
+
+                            .foregroundColor(Color.black)
+                            .frame(width: geometry.size.width * 0.5)
+                            .background(
+                                RoundedRectangle(cornerRadius: 30).fill(Color.white)
+
+                            )
+                        }
                     }
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height*0.8 )

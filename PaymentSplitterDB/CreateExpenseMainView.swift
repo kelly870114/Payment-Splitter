@@ -58,7 +58,7 @@ struct CreateExpenseMainView: View {
                 
             }
         }
-        .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
+        .navigationBarTitle(Text("Expense").font(FontLarge), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         
     }
