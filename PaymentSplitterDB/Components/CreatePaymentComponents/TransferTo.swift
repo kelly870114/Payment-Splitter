@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct TransferTo: View {
-    @State private var amount = ""
+    @Binding public var amount : Float
+    @State public var note = ""
     var textFieldBorder: some View {
         RoundedRectangle(cornerRadius: 16, style: .continuous).fill(Color.white)
     }
@@ -33,7 +34,7 @@ struct TransferTo: View {
                 .fontWeight(.bold)
             
             CryptoCurrPicker()
-            TextField("Placeholder", text: $amount, prompt: Text("Enter Amount"))
+            TextField("Enter Amount", value: $amount, format: .number)
                 //.font(FontRegular)
                 .frame(width: 275)
     //            .background(textFieldBorder)
@@ -49,12 +50,14 @@ struct TransferTo: View {
                   .padding(12.0)
                   // TextField border.
                   .background(textFieldBorder)
-            TextField("Placeholder", text: $amount, prompt: Text("Note (Optional)"))
+            
+            TextField("Placeholder", text: $note, prompt: Text("Note (Optional)"))
                 .frame(width: 275)
                   .textFieldStyle(PlainTextFieldStyle())
                   .multilineTextAlignment(.leading)
                   .padding(12.0)
                   .background(textFieldBorder)
+            
         }
         .padding()
         .background(Color("Card"))
@@ -66,6 +69,6 @@ struct TransferTo: View {
 
 struct TransferTo_Previews: PreviewProvider {
     static var previews: some View {
-        TransferTo()
+        TransferTo(amount: .constant(0))
     }
 }

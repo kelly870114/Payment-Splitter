@@ -46,7 +46,10 @@ struct ContentView: View {
                             TotalBalance()
                             
                             HStack{
-                                Button(action: {print("HI")}) {
+                                
+                                
+                                
+                                NavigationLink(destination: CreateExpenseMainView()) {
                                     VStack{
                                         Image("AddExpense")
                                             .resizable()
@@ -58,8 +61,10 @@ struct ContentView: View {
                                     }
                                     //Action
                                 }
+                                .navigationBarBackButtonHidden(true)
                                 .padding(.leading, 40)
                                 .padding(.top, 10)
+                                
                                 Spacer()
                                 NavigationLink(destination: CreatePaymentMainView()) {
                                     VStack{
@@ -73,9 +78,10 @@ struct ContentView: View {
                                     }
                                     //Action
                                 }
+                                .navigationBarBackButtonHidden(true)
                                 .padding(.top, 10)
                                 Spacer()
-                                Button(action: {print("HI")}) {
+                                NavigationLink(destination: testPOST()) {
                                     VStack{
                                         Image("Withdraw")
                                             .resizable()
@@ -94,7 +100,6 @@ struct ContentView: View {
                         }
                     }
                     .frame(width: geometry.size.width, height: geometry.size.height*0.45)
-                    .background(Color.pink)
                     //Get Activity
                     VStack(alignment: .leading){
                         Text("All Activity")
@@ -113,7 +118,7 @@ struct ContentView: View {
                 }
             }
         }
-        
+        .navigationBarBackButtonHidden(true)
     }
 }
 func getCurrentMonth() -> String{

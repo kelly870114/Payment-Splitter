@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct CreatePaymentStep2View: View {
+    @State private var answer : Bool = false
+    @State private var amount : Float = 0
+    @ObservedObject var manager = PaymentAuth()
     init() {
-        //Use this if NavigationBarTitle is with displayMode = .inline
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,.font : UIFont(name: "Nunito-Bold", size: 30)!]
     }
     var FontMini : Font = Font.custom("Nunito", size: 13)
@@ -17,47 +19,81 @@ struct CreatePaymentStep2View: View {
     var FontRegular : Font = Font.custom("Nunito", size: 20)
     var FontLarge : Font = Font.custom("Nunito", size: 30)
     var body: some View {
-        NavigationView{
-            GeometryReader{ geometry in
-                VStack{
-                    ZStack(alignment: .topLeading){
-                        RoundedRectMid()
-                            .frame(width: geometry.size.width, height: geometry.size.height * 0.9).ignoresSafeArea()
-                        VStack(alignment: .center, spacing: 20){
-                            
-                            Image("Step2")
-                                .resizable()
-                                .frame(width:150, height: 25)
-                                .padding(.top, 50)
-                            TotalBalance()
-                            TransferTo()
-                        }
+        
+        GeometryReader{ geometry in
+            VStack{
+                ZStack(alignment: .topLeading){
+                    RoundedRectMid()
+                        .frame(width: geometry.size.width, height: geometry.size.height * 0.9).ignoresSafeArea()
+                    VStack(alignment: .center, spacing: 20){
+                        
+                        Image("Step2")
+                            .resizable()
+                            .frame(width:150, height: 25)
+                            .padding(.top, 50)
+                        TotalBalance()
+                        TransferTo(amount: self.$amount)
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height*0.8 )
-                    
-                    
-                    VStack(alignment: .leading){
-                        NavigationLink(destination: CreatePaymentMainView()) {
-                            Text("Confirm")
-                                .font(FontRegular)
-                                .fontWeight (.bold)
-                                .padding(10)
-                                
-                                .foregroundColor(Color.white)
-                                .frame(width: geometry.size.width * 0.8)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 30).fill(Color("SecondColor"))
-                                    
-                                )
-                            
-                            
-                        }
-                    }
-                    
                 }
+                .frame(width: geometry.size.width, height: geometry.size.height*0.8 )
+                
+                
+                VStack(alignment: .leading){
+//                    Button(action: {
+//                        print(self.amount)
+//
+//                    }) {
+//
+//                        HStack{
+//                            Spacer()
+//                            Text("Confirm")
+//                            Spacer()
+//                        }
+//                        .accentColor(Color.white)
+//                        .padding(.vertical, 10)
+//                        .background(Color.red)
+//                        .cornerRadius(5)
+//                        .padding(.horizontal, 40)
+//
+//                    }
+                    NavigationLink(destination: CreatePaymentStep3View(), isActive: $answer, label: {
+                        Button(action: {
+                            self.manager.paymentPostAuth(title:"sherrytoAmy", payer: "sherry", payee: "amy", amount: self.amount); self.answer = true
+                                }, label: {
+                                        Text("Confirm")
+                                        .font(FontRegular)
+                                        .fontWeight (.bold)
+                                        .padding(10)
+
+                                        .foregroundColor(Color.white)
+                                        .frame(width: geometry.size.width * 0.8)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 30).fill(Color("SecondColor"))
+
+                                        )
+
+                            })
+                    })
+//                    NavigationLink(destination: CreatePaymentStep3View()) {
+//                        Text("Confirm")
+//                            .font(FontRegular)
+//                            .fontWeight (.bold)
+//                            .padding(10)
+//
+//                            .foregroundColor(Color.white)
+//                            .frame(width: geometry.size.width * 0.8)
+//                            .background(
+//                                RoundedRectangle(cornerRadius: 30).fill(Color("SecondColor"))
+//
+//                            )
+//                    }
+                }
+                
             }
-            .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
         }
+        .navigationBarTitle(Text("Payment").font(FontLarge), displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        
     }
 }
 
