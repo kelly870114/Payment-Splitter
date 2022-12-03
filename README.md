@@ -6,20 +6,41 @@ Due to the widespread use of cryptocurrencies, many people are building NFTs or 
 
 ## Installation
 
-We use Truffle as development environment framework and Ganache CLI as Ethereum RP client. Clone this Github project and make sure you have the following installed :
+1. We use Truffle as development environment framework and Ganache CLI as Ethereum RP client. Clone this Github project and make sure you have the following installed :
 
 ```bash
 npm install -g ganache-cli
 npm install -g truffle
 ```
-Then, run :
+2. For other dependencies run :
 ```bash
 npm install
 ```
 
-We also use MongoDB as our backup storage.
-```bash
-```
+3. We install 64bit MongoDB 4.0.28 as our version.
+(for newest versions you may go to https://www.mongodb.com/download-center/community for your platform).
+
+  - Download, extract and move:
+
+      `mv mongodb-osx-x86_64-4.0.28/ /usr/local/mongodb/`
+
+  - Add to file `~/.zshrc` this:
+
+     `export PATH="$PATH:/usr/local/mongodb/bin"`
+
+  - Reload terminal (or close, open it):
+
+     `source ~/.zshrc`
+
+  - Make directory for data and set rights:
+
+     `mkdir -p ~/data/db`
+
+
+  - Run MongoDB:
+
+     `mongod --dbpath ~/data/db`
+
 
 ## Getting Started
 1. Open MongoDB Compass and run it
@@ -35,7 +56,8 @@ cd backend
 ```bash
 ganache-cli
 ```
-<img width="570" alt="截圖 2022-12-02 下午9 52 13" src="https://user-images.githubusercontent.com/31930515/205426732-32a872fd-04ca-4af7-b678-f7047aafad35.png">
+
+<img width="551" alt="截圖 2022-12-02 下午9 57 03" src="https://user-images.githubusercontent.com/31930515/205426834-8d59f93b-faa8-4b69-97d6-3f7bee8ad553.png">
 
 
 4. Migrate and Deploy smart contract
